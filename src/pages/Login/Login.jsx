@@ -1,9 +1,10 @@
 import React from "react"
 import './Login.css'
+import assets from "../../assets/assets"
 const Login=()=>{
     return(
-        <div>
-          <h1>we are on the login page</h1>
+        <div className="login">
+          <img src={assets.logo_big} alt="" className="Logo" />
         </div>
     )
 }
