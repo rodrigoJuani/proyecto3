@@ -1,10 +1,10 @@
 import React,{useState} from 'react'
-import React from 'react'
 import './Login.css'
 import assets from 'C:/Users/pc/Desktop/proyecto3/src/assets/assets'
 const Login=()=>{
 
           const[currState,setCurrState]=useState("Sign up");
+
 
     return(
         <div className='login'>
