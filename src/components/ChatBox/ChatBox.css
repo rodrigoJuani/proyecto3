@@ -1,0 +1,16 @@
+.chat_box{
+    height: 75vh;
+    position: relative;
+    background-color: #f1f5ff;
+}
+.chat_user{
+    padding: 10px 15px;
+    display: flex;
+    align-items:  center;
+    gap:10px;
+    border-bottom: 1px solid #c6c6c6;
+}
+.chat_user img{
+    width: 25px;
+    border-radius: 50%;
+}
