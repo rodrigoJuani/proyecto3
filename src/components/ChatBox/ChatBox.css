@@ -27,3 +27,19 @@
     align-items: center;
     gap: 5px;
 }
+.chat-input{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 15px;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.chat-input img{
+    width: 30px;
+    cursor: pointer;
+}
+*<<0*777!////////////////Comenzando con la parte del chat3
