@@ -42,4 +42,14 @@
     width: 30px;
     cursor: pointer;
 }
-*<<0*777!////////////////Comenzando con la parte del chat3
+.chat-input label{
+    display: flex;
+}
+.chat-label img{
+    width: 22px;
+}
+.chat-input input{
+    flex: 1;
+    border: none;
+    outline: none;
+}
