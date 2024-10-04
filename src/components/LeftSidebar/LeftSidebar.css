@@ -28,13 +28,16 @@
     margin-top: 20px;
 }
 .ls-search img{
+    width: 16px;
+}
+.ls-search input{
     background: transparent;
     border: none;
     outline: none;
     color: white;
     font-size: 11px;
 }
-.ls-search input{
+.ls-search input::placeholder{
     color: #c8c8c8;
 }
 .ls-list{
