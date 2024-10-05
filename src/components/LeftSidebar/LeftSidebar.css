@@ -64,7 +64,7 @@
     flex-direction: column;
 }
 .friends span{
-    display: #9f9f9f;
+    color: #9f9f9f;
     font-size: 11px;
 }
 .friends:hover{

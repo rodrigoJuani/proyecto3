@@ -45,7 +45,7 @@
 .chat-input label{
     display: flex;
 }
-.chat-label img{
+.chat-input label img{
     width: 22px;
 }
 .chat-input input{
