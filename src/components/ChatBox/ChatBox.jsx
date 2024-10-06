@@ -18,6 +18,15 @@ const ChatBox=()=>{
                     <p>2:30 PM</p>
                     </div>
                 </div>
+
+                <div className="s-msg">
+                    <img src={assets.pic1} alt=""/>
+                    <div>
+                    <img src={assets.profile_img} alt=''/>
+                    <p>2:30 PM</p>
+                    </div>
+                </div>
+                <<<<<<<<<<<///Comenzando con la parte del chat5
                 <div className="r-msg">
                     <p className="msg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium illo soluta unde facilis asperiores minus.</p>
                     <div>
