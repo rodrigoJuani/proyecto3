@@ -93,3 +93,8 @@
     text-align: center;
     font-size: 9px;
 }
+.msg-img{
+    max-width: 230px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
