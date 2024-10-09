@@ -1,0 +1,26 @@
+.rs{
+    color: white;
+    background: #001030;
+    position: relative;
+    height: 75vh;
+    overflow-y: scroll;
+}
+.rs-profile{
+    padding-top: 60px;
+    text-align: center;
+    margin: auto;
+}
+.rs-profile img{
+    width: 110px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+.rs-profile h3{
+    font-size:  18px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:5px;
+    margin: 5px 0px;
+}
