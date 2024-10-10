@@ -24,3 +24,25 @@
     gap:5px;
     margin: 5px 0px;
 }
+.rs-profile p{
+    font-size: 10px;
+    opacity: 80%;
+    font-weight: 300;
+}
+.rs hr{
+    border-color: #ffffff50;
+    margin: 15px 0px;
+}
+.rs-media{
+    padding: 0px 20px;
+    font-size: 13px;
+}
+.rs-media div{
+    max-height: 180px;
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+    margin-top: 8px;
+}
+
