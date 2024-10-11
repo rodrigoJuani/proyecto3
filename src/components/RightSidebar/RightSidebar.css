@@ -45,4 +45,23 @@
     gap: 5px;
     margin-top: 8px;
 }
+.rs-media div img{
+    width: 60px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.rs button{
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #077eff;
+    color: white;
+    border: none;
+    font-size: 12px;
+    font-weight: 300;
+    padding: 10px 65px;
+    border-radius: 20px;
+    cursor: pointer;
+}
 
