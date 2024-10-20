@@ -13,11 +13,15 @@ const AppContextProvider=(props)=>{
         try{
             const userRef=doc(db,'users',uid);
             const userSnap=await getDoc(userRef);
-            console.log(userSnap)
+            const userData=userSnap.data();
+            setUserData(userData);
+            if(userData.avatar){
+                
+            }
         }catch(error){
         }
     }
-
+///2:39 ultimo punto
     const value={
         useData,setUserData,
         chatData,setChatData,

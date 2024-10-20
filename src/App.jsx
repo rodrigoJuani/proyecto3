@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { Route,Routes } from 'react-router-dom'
+import { Route,Routes,useNavigate } from 'react-router-dom'
 import Login from './pages/Login/Login'
 import Chat from './pages/Chat/Chat'
 import ProfileUpdate from './pages/ProfileUpdate/ProfileUpdate'
@@ -17,7 +17,6 @@ const App=()=>{
     onAuthStateChanged(auth, async(user)=>{
       if(user){
         navigate('/chat')
-        console.log(user)
         await loadUserData(user.uid)
       }
       else{
