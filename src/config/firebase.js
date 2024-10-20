@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { toast } from "react-toastify";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -39,8 +39,24 @@ const signup=async(username,email,password)=>{
       })
     }catch(error){
         console.error(error)
-        toast.error(error.code)
+        toast.error(error.code.split('/')[1].split('-').join(" "));
     }
 }
-export{signup}
+const login=async(email,password)=>{
+  try{
+    await signInWithEmailAndPassword(auth,email,password)
+  }catch(error){
+    console.error(error);
+    toast.error(error.code.split('/')[1].split('-').join(" "));
+  }
+}
+const logout= async()=>{
+  try{
+    await signOut(auth)
+  }catch(error){
+    console.error(error);
+    toast.error(error.code.split('/')[1].split('-').join(" "));
+  }
+  }
+export{signup,login,logout,auth,db}
 ////1:57 es la base de datos
