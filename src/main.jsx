@@ -5,7 +5,7 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import AppContextProvider from './context/AppContext.jsx'
 
-ReactDOOM.createRoot(document.getElementById('root')).render(
+ReactDOOM.createRoot(document.getElementById('root')).render(//ReactDOOM
     <BrowserRouter>
       <AppContextProvider>
         <App />

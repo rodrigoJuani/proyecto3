@@ -9,15 +9,23 @@ const Login=()=> {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const onSubmitHandler = (event) => {
-    event.preventDefault()
-    if (currState === "Sign up") {
-      signup(userName, email, password);
+  const onSubmitHandler = async (event) => {
+    event.preventDefault();
+    try {
+        if (currState === "Sign up") {
+            await signup(userName, email, password);
+            // Puedes agregar un mensaje de éxito aquí o redirigir al usuario
+        } else {
+            await login(email, password);
+            // Puedes agregar un mensaje de éxito aquí o redirigir al usuario
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        // Aquí puedes mostrar un mensaje de error al usuario
     }
-    else {
-      login(email, password)
-    }
-  }
+};
+
+
   return (
     <div className='login'>
       <img src={assets.logo_big} alt="" className="logo" />
@@ -33,7 +41,7 @@ const Login=()=> {
           <p>Agree to the terms of use & privacy policy</p>
         </div>
         <div className="login-forgot">
-          {currState === "Sig up"
+          {currState === "Sign up"
             ? <p className="login-toggle">Already have an account <span onClick={() => setCurrState("Login")}>Login here</span></p> : <p className="login-toggle">Create an account<span onClick={() => setCurrState("Sign up")}>click here</span></p>}
         </div>
       </form>

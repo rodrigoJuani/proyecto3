@@ -22,17 +22,18 @@ const AppContextProvider=(props)=>{
             }else{
                 navigate('/profile');
             }
-            await updateDoc(useRef,{
+            await updateDoc(userRef,{
                 lastSeen:Date.now()
             });
             setInterval(async ()=>{
                 if(auth.chatUser){
-                    await updateDoc(useRef,{
+                    await updateDoc(userRef,{
                         lastSeen:Date.now()
                     });
                 }
             },60000);
         }catch(error){
+            console.error("Error loading user data:", error); 
         }
     }
 ///2:39 ultimo punto

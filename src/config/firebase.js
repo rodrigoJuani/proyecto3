@@ -59,6 +59,6 @@ const logout = async () => {
     }
 };
 
-export default { signup, login, logout, auth, db };
+export  { signup, login, logout, auth, db };
 
 ////1:57 es la base de datos
