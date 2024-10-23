@@ -1,8 +1,25 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import './ProfileUpdate.css'
 import assets from '../../assets/assets'
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../config/firebase';
+import { doc, getDoc } from 'firebase/firestore';
 const ProfileUpdate=()=>{
     const [image,setImage]=useState(false);
+    const[name,setName]=useState("");
+    const[bio,setBio]=useState("");
+    const[uid,setUid]=useState("");
+
+    useEffect(()=>{
+        onAuthStateChanged(auth,async(user)=>{
+            if(user){
+                setUid(user.uid)
+                const docRef=doc(db,"users",user.uid);
+                const docSnap=getDoc(docRef);
+            }
+        })
+    },[])
+
     return(
         <div className='profile'>
             <div className="profile-container">
@@ -13,8 +30,8 @@ const ProfileUpdate=()=>{
                         <img src={image? URL.createObjectURL(image) : assets.avatar_icon} alt=""/>
                         upload profile image
                     </label>
-                    <input type="text" placeholder='Your name' required />
-                    <textarea placeholder='Write profile bio' required></textarea>
+                    <input onChange={(e)=>setName(e.target.value)} value={name} type="text" placeholder='Your name' required />
+                    <textarea onChange={(e)=>setBio(e.target.bio)} value={bio} placeholder='Write profile bio' required></textarea>
                     <button type='submit'>Save</button>
                 </form>
                 <img  className="profile-pic" src={image? URL.createObjectURL(image) : assets.logo_icon} alt=''/>
