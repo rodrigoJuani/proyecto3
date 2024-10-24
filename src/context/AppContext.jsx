@@ -38,9 +38,17 @@ const AppContextProvider=(props)=>{
     }
     useEffect(()=>{
         if(userData){
-            const chatRef=doc(db,'chat',userData.id);
+            const chatRef=doc(db,'chats',userData.id);
             const unSub=onSnapshot(chatRef,async(res)=>{
-                const chatItems=res.data().chatData;
+                const chatItems=res.data().chatsData;
+                const  tempData=[];
+                for(const item of chatItems){
+                    const userRef=doc(db,'users',item.rId);
+                    const userSnap=await getDoc(userRef);
+                    const userData=userSnap.data();
+                    tempData.push({...item,userData})
+                }
+                setChatData(tempData.sort((a,b)=>b.updateAt-a.updateAt))
             })
         }
     },[userData])
