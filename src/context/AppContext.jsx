@@ -41,6 +41,7 @@ const AppContextProvider=(props)=>{
             const chatRef=doc(db,'chats',userData.id);
             const unSub=onSnapshot(chatRef,async(res)=>{
                 const chatItems=res.data().chatsData;
+                console.log(res.data());
                 const  tempData=[];
                 for(const item of chatItems){
                     const userRef=doc(db,'users',item.rId);
@@ -50,6 +51,9 @@ const AppContextProvider=(props)=>{
                 }
                 setChatData(tempData.sort((a,b)=>b.updateAt-a.updateAt))
             })
+            return ()=>{
+                unSub();
+            }
         }
     },[userData])
 ///2:39 ultimo punto
