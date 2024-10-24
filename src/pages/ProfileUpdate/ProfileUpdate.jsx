@@ -50,7 +50,7 @@ const ProfileUpdate = () => {
             }
             const snap=await getDoc(docRef);
             setUserData(snap.data());
-            
+            navigate('/chat');
 
         } catch (error) {
             console.error(error);
@@ -90,7 +90,7 @@ const ProfileUpdate = () => {
                     <textarea onChange={(e) => setBio(e.target.bio)} value={bio} placeholder='Write profile bio' required></textarea>
                     <button type='submit'>Save</button>
                 </form>
-                <img className="profile-pic" src={image ? URL.createObjectURL(image) : assets.logo_icon} alt='' />
+                <img className="profile-pic" src={image ? URL.createObjectURL(image) :prevImage? prevImage:  assets.logo_icon} alt='' />
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
-import{doc, getDoc, updateDoc} from "firebase/firestore";
-import { createContext,useState } from "react";
+import{doc, getDoc, onSnapshot, updateDoc} from "firebase/firestore";
+import { createContext,useEffect,useState } from "react";
 import{auth, db} from "../config/firebase";
 import { useNavigate } from "react-router-dom";
 
@@ -36,6 +36,14 @@ const AppContextProvider=(props)=>{
             console.error("Error loading user data:", error); 
         }
     }
+    useEffect(()=>{
+        if(userData){
+            const chatRef=doc(db,'chat',userData.id);
+            const unSub=onSnapshot(chatRef,async(res)=>{
+                const chatItems=res.data().chatData;
+            })
+        }
+    },[userData])
 ///2:39 ultimo punto
     const value={
         userData,setUserData,
