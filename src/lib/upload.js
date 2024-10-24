@@ -7,10 +7,13 @@ const upload =async(file)=>{
 
     const uploadTask = uploadBytesResumable(storageRef, file);
 
+    return new Promise(()=>{
+        
+    })
     upload.on('state_changed',
         (snapshot)=>{
             const progress=(snapshot.bytesTransferred / snapshot.totalBytes)*100;
-            console.log('Upload.is' +progress+'% donde');
+            console.log('Upload is' +progress+'% done');
             switch(snapshot.state){
                 case'pause':
                             console.log('Upload is paused');
@@ -23,11 +26,11 @@ const upload =async(file)=>{
         (error)=>{
         },
         ()=>{
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>)
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+                resolve(downloadURL)
+            });
         }
-    )
-    return new Promise((resolve,reject)=>{
-    })
+    );
 }
 
 export default upload
