@@ -15,12 +15,15 @@ const LeftSidebar=()=>{
         try{
             const input =e.target.value;
             if(input){
+                setShowSearch(true);
                 const userRef=collection(db,'users');
-            const q=query(userRef,where("username","==",input.toLowerCase()));
-            const querySnap=await getDocs(q);
+                const q=query(userRef,where("username","==",input.toLowerCase()));
+                const querySnap=await getDocs(q);
             if(!querySnap.empty && querySnap.docs[0].data.id!=userData.id){
                 setUser(querySnap.docs[0].data());
             }
+            }else{
+                setShowSearch();
             }
         }catch(error){
         }
