@@ -14,11 +14,13 @@ const LeftSidebar=()=>{
     const inputHandler=async(e)=>{
         try{
             const input =e.target.value;
-            const userRef=collection(db,'users');
+            if(input){
+                const userRef=collection(db,'users');
             const q=query(userRef,where("username","==",input.toLowerCase()));
             const querySnap=await getDocs(q);
             if(!querySnap.empty && querySnap.docs[0].data.id!=userData.id){
-                console.log(querySnap.docs[0].data());
+                setUser(querySnap.docs[0].data());
+            }
             }
         }catch(error){
         }
