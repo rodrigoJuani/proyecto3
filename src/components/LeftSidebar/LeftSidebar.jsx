@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import './LeftSidebar.css'
 import assets from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,8 @@ import { AppContext } from "../../context/AppContext";
 const LeftSidebar=()=>{
     const navigate=useNavigate();
     const {userData}=useContext(AppContext);
+    const {user,setUser}=useState(null);
+    const [showSearch,setShowSearch]=useState(false);
 
     const inputHandler=async(e)=>{
         try{
