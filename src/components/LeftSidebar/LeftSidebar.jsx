@@ -52,7 +52,9 @@ const LeftSidebar=()=>{
             </div>
             <div className="ls-list">
             {showSearch && user
-            ? <div></div>
+            ? <div className="friends and-user">
+                <img src={user.avatar}></img>
+            </div>
             }
             {Array(12).fill("").map((item,index)=>(
                  <div key={index} className="friends">
