@@ -53,18 +53,19 @@ const LeftSidebar=()=>{
             <div className="ls-list">
             {showSearch && user
             ? <div className="friends and-user">
-                <img src={user.avatar}></img>
+                <img src={user.avatar} alt=""/>
+                <p>{user.name}</p>
             </div>
+            :Array(12).fill("").map((item,index)=>(
+                <div key={index} className="friends">
+                <img src={assets.profile_img} alt=""/>
+                <div>
+                    <p>Richar Sanford</p>
+                    <span>Hello, how are you?</span>
+                </div>
+            </div>
+           ))
             }
-            {Array(12).fill("").map((item,index)=>(
-                 <div key={index} className="friends">
-                 <img src={assets.profile_img} alt=""/>
-                 <div>
-                     <p>Richar Sanford</p>
-                     <span>Hello, how are you?</span>
-                 </div>
-             </div>
-            ))}
             </div>
         </div>
     )
