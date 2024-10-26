@@ -21,9 +21,11 @@ const LeftSidebar=()=>{
                 const querySnap=await getDocs(q);
             if(!querySnap.empty && querySnap.docs[0].data.id!=userData.id){
                 setUser(querySnap.docs[0].data());
+            }else{
+                setUser(null);
             }
             }else{
-                setShowSearch();
+                setShowSearch(false);
             }
         }catch(error){
         }
