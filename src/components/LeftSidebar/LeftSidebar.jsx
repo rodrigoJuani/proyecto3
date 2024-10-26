@@ -2,7 +2,7 @@ import React from "react";
 import './LeftSidebar.css'
 import assets from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
-import { collection } from "firebase/firestore";
+import { collection, query, where } from "firebase/firestore";
 import { db } from "../../config/firebase";
 const LeftSidebar=()=>{
     const navigate=useNavigate();
@@ -11,6 +11,7 @@ const LeftSidebar=()=>{
         try{
             const input =e.target.value;
             const userRef=collection(db,'users');
+            const q=query(userRef,where("username","==",input.toLowerCase()));
         }catch(error){
         }
     }
