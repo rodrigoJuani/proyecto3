@@ -38,6 +38,7 @@ const LeftSidebar=()=>{
             const newMessageRef=doc(messagesRef);
             await setDoc(newMessageRef,{
                 createAt:serverTimestamp(),
+                messages:[]
             })
         }catch(error){
         }
