@@ -36,6 +36,9 @@ const LeftSidebar=()=>{
         const chatsRef=collection(db,"chats");
         try{
             const newMessageRef=doc(messagesRef);
+            await setDoc(newMessageRef,{
+                createAt:
+            })
         }catch(error){
         }
     }
