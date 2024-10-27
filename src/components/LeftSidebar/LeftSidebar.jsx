@@ -34,6 +34,10 @@ const LeftSidebar=()=>{
     const addChat=async()=>{
         const messagesRef=collection(db,"messages");
         const chatsRef=collection(db,"chats");
+        try{
+            const newMessageRef=doc(messagesRef);
+        }catch(error){
+        }
     }
     return(
         <div className="ls">
