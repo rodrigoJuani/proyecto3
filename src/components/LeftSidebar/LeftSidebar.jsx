@@ -40,6 +40,9 @@ const LeftSidebar=()=>{
                 createAt:serverTimestamp(),
                 messages:[]
             })
+            await updateDoc(doc(chatsRef,user.id),{
+                chatsData
+            })
         }catch(error){
         }
     }
