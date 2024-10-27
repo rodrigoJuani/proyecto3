@@ -31,6 +31,9 @@ const LeftSidebar=()=>{
         }
     }
 
+    const addChat=async()=>{
+        
+    }
     return(
         <div className="ls">
             <div className="ls-top">
