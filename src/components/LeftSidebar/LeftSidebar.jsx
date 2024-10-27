@@ -32,7 +32,8 @@ const LeftSidebar=()=>{
     }
 
     const addChat=async()=>{
-        
+        const messagesRef=collection(db,"messages");
+        const chatsRef=collection(db,"chats");
     }
     return(
         <div className="ls">
