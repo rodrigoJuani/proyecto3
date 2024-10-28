@@ -23,7 +23,9 @@ const LeftSidebar=()=>{
             if(!querySnap.empty && querySnap.docs[0].data.id!=userData.id){
                 let userExist=false
                 chatData.map(user=>{
-
+                    if(user.rId===querySnap.docs[0].data.id){
+                        userExist=true;
+                    }
                 })
                 setUser(querySnap.docs[0].data());
             }else{
