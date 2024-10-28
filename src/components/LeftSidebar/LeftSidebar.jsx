@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { arrayUnion, collection, getDoc, query, where } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../context/AppContext";
+import { toast } from "react-toastify";
 const LeftSidebar=()=>{
     const navigate=useNavigate();
     const {userData}=useContext(AppContext);
@@ -59,6 +60,7 @@ const LeftSidebar=()=>{
                 })
             })
         }catch(error){
+            toast.error(error.message);
         }
     }
     return(
