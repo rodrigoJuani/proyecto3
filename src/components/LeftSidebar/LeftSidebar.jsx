@@ -21,6 +21,10 @@ const LeftSidebar=()=>{
                 const q=query(userRef,where("username","==",input.toLowerCase()));
                 const querySnap=await getDocs(q);
             if(!querySnap.empty && querySnap.docs[0].data.id!=userData.id){
+                let userExist=false
+                chatData.map(user=>{
+
+                })
                 setUser(querySnap.docs[0].data());
             }else{
                 setUser(null);
