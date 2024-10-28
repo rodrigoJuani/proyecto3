@@ -49,6 +49,15 @@ const LeftSidebar=()=>{
                     messageSeen:true
                 })
             })
+            await updateDoc(doc(chatsRef,userData.id),{
+                chatsData:arrayUnion({
+                    messageId:newMessageRef.id,
+                    lastMessage:"",
+                    rId:user.id,
+                    updatedAt:Date.now(),
+                    messageSeen:true
+                })
+            })
         }catch(error){
         }
     }
