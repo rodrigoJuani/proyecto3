@@ -98,9 +98,9 @@ const LeftSidebar=()=>{
                 <img src={user.avatar} alt=""/>
                 <p>{user.name}</p>
             </div>
-            :Array(12).fill("").map((item,index)=>(
+            :chatData.map((item,index)=>(
                 <div key={index} className="friends">
-                <img src={assets.profile_img} alt=""/>
+                <img src={item.userData.avatar} alt=""/>
                 <div>
                     <p>Richar Sanford</p>
                     <span>Hello, how are you?</span>
