@@ -2,13 +2,13 @@ import React, { useContext, useState } from "react";
 import './LeftSidebar.css'
 import assets from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
-import { arrayUnion, collection, getDoc, query, where } from "firebase/firestore";
+import { arrayUnion, collection, doc,getDocs, query, serverTimestamp,setDoc,updateDoc,where } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
 const LeftSidebar=()=>{
     const navigate=useNavigate();
-    const {userData}=useContext(AppContext);
+    const {userData,chatData}=useContext(AppContext);
     const {user,setUser}=useState(null);
     const [showSearch,setShowSearch]=useState(false);
 
@@ -42,7 +42,7 @@ const LeftSidebar=()=>{
                 messages:[]
             })
             await updateDoc(doc(chatsRef,user.id),{
-                chatsData:arrayUnion({
+                chatData:arrayUnion({
                     messageId:newMessageRef.id,
                     lastMessage:"",
                     rId:userData.id,
@@ -51,7 +51,7 @@ const LeftSidebar=()=>{
                 })
             })
             await updateDoc(doc(chatsRef,userData.id),{
-                chatsData:arrayUnion({
+                chatData:arrayUnion({
                     messageId:newMessageRef.id,
                     lastMessage:"",
                     rId:user.id,
@@ -61,6 +61,7 @@ const LeftSidebar=()=>{
             })
         }catch(error){
             toast.error(error.message);
+
         }
     }
     return(
