@@ -27,6 +27,9 @@ const LeftSidebar=()=>{
                         userExist=true;
                     }
                 })
+                if(!userExist){
+                    setUser(querySnap.docs[0].data());
+                }
                 setUser(querySnap.docs[0].data());
             }else{
                 setUser(null);
