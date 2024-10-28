@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import './LeftSidebar.css'
 import assets from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
-import { collection, getDoc, query, where } from "firebase/firestore";
+import { arrayUnion, collection, getDoc, query, where } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../context/AppContext";
 const LeftSidebar=()=>{
@@ -41,7 +41,10 @@ const LeftSidebar=()=>{
                 messages:[]
             })
             await updateDoc(doc(chatsRef,user.id),{
-                chatsData
+                chatsData:arrayUnion({
+                    messageId:newMessageRef.id,
+                    
+                })
             })
         }catch(error){
         }
