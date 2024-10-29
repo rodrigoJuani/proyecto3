@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './Chat.css'
 import LeftSidebar from '../../components/LeftSidebar/LeftSidebar'
 import ChatBox from '../../components/ChatBox/ChatBox'
@@ -7,6 +7,12 @@ import { AppContext } from '../../context/AppContext'
 const Chat=()=>{
     const{chatData,userData}=useContext(AppContext);
     const[loading,setLoading]=useState(true)
+
+    useEffect(()=>{
+        if(chatData && userData){
+            
+        }
+    },[chatData,userData])
     return(
         <div className='chat'>
             {
