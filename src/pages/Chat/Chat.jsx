@@ -10,7 +10,7 @@ const Chat=()=>{
 
     useEffect(()=>{
         if(chatData && userData){
-            
+            setLoading(false)
         }
     },[chatData,userData])
     return(
