@@ -41,6 +41,7 @@ const LeftSidebar=()=>{
         }
     }
 
+
     const addChat=async()=>{
         const messagesRef=collection(db,"messages");
         const chatsRef=collection(db,"chats");
@@ -72,6 +73,8 @@ const LeftSidebar=()=>{
             toast.error(error.message);
 
         }
+    }
+    const setChat=async(item)=>{
     }
     return(
         <div className="ls">
