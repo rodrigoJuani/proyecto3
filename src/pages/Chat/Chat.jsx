@@ -11,13 +11,13 @@ const Chat=()=>{
         <div className='chat'>
             {
                 loading
-                
-            }
-            <div className="chat-container">
+                ?<p className='loading'>loading---</p>
+                :<div className="chat-container">
                 <LeftSidebar/>
                 <ChatBox/>
                 <RightSidebar/>
             </div>
+            }
         </div>
     )
 }
