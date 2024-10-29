@@ -75,6 +75,7 @@ const LeftSidebar=()=>{
         }
     }
     const setChat=async(item)=>{
+        console.log(item);
     }
     return(
         <div className="ls">
