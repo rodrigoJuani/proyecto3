@@ -102,7 +102,7 @@ const LeftSidebar=()=>{
                 <div key={index} className="friends">
                 <img src={item.userData.avatar} alt=""/>
                 <div>
-                    <p>Richar Sanford</p>
+                    <p>{item.userData}</p>
                     <span>Hello, how are you?</span>
                 </div>
             </div>
