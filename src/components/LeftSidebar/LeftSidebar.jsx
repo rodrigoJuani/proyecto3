@@ -103,7 +103,7 @@ const LeftSidebar=()=>{
                 <img src={item.userData.avatar} alt=""/>
                 <div>
                     <p>{item.userData}</p>
-                    <span>Hello, how are you?</span>
+                    <span>{item.lastMessage}</span>
                 </div>
             </div>
            ))
