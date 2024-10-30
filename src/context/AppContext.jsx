@@ -65,6 +65,7 @@ const AppContextProvider=(props)=>{
         loadUserData,
         messages,setMessages,
         messagesId,setMessagesId,
+        chatUser,setChatUser
     }
     return(
         <AppContext.Provider value={value}>
