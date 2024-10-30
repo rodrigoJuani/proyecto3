@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import './ChatBox.css'
 import assets from "../../assets/assets";
+import { AppContext } from "../../context/AppContext";
 const ChatBox=()=>{
+    const {userData,messagesId,chatUser,messages,setMessages}=useContext(AppContext);
     return(
     <div className="chat-box">
         <div className="chat-user">
