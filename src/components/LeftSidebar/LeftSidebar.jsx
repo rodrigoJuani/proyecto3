@@ -76,6 +76,7 @@ const LeftSidebar=()=>{
     }
     const setChat=async(item)=>{
         setMessagesId(item.messageId);
+        setChatUser(item)
     }
     return(
         <div className="ls">
