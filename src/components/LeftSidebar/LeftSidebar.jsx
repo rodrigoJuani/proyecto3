@@ -8,7 +8,7 @@ import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
 const LeftSidebar=()=>{
     const navigate=useNavigate();
-    const {userData,chatData,chatUser,setChatuser,setMessagesId}=useContext(AppContext);
+    const {userData,chatData,chatUser,setChatuser,setMessagesId,messagesId}=useContext(AppContext);
     const {user,setUser}=useState(null);
     const [showSearch,setShowSearch]=useState(false);
 
