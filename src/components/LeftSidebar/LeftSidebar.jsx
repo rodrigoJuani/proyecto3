@@ -75,6 +75,7 @@ const LeftSidebar=()=>{
         }
     }
     const setChat=async(item)=>{
+        setMessagesId(item.messageId);
     }
     return(
         <div className="ls">
