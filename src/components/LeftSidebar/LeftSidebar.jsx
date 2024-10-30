@@ -99,7 +99,7 @@ const LeftSidebar=()=>{
             </div>
             <div className="ls-list">
             {showSearch && user
-            ? <div className="friends and-user">
+            ? <div className="friends add-user">
                 <img src={user.avatar} alt=""/>
                 <p>{user.name}</p>
             </div>
@@ -107,7 +107,7 @@ const LeftSidebar=()=>{
                 <div onClick={()=>setChat(item)} key={index} className="friends">
                 <img src={item.userData.avatar} alt=""/>
                 <div>
-                    <p>{item.userData}</p>
+                    <p>{item.userData.name}</p>
                     <span>{item.lastMessage}</span>
                 </div>
             </div>
