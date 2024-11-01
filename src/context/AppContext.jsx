@@ -51,13 +51,14 @@ const AppContextProvider=(props)=>{
                     const userData=userSnap.data();
                     tempData.push({...item,userData})
                 }
-                setChatData(tempData.sort((a,b)=>b.updateAt-a.updateAt))
+                setChatData(tempData.sort((a,b)=>b.updatedAt-a.updatedAt))
             })
             return ()=>{
                 unSub();
             }
         }
     },[userData])
+    
 ///2:39 ultimo punto
     const value={
         userData,setUserData,

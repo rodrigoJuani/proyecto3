@@ -20,9 +20,9 @@ const LeftSidebar=()=>{
                 const userRef=collection(db,'users');
                 const q=query(userRef,where("username","==",input.toLowerCase()));
                 const querySnap=await getDocs(q);
-            if(!querySnap.empty && querySnap.docs[0].data.id!=userData.id){
+            if(!querySnap.empty && querySnap.docs[0].data.id!==userData.id){
                 let userExist=false
-                chatData.map(user=>{
+                chatData.map(user=>{ 
                     if(user.rId===querySnap.docs[0].data.id){
                         userExist=true;
                     }
@@ -30,7 +30,6 @@ const LeftSidebar=()=>{
                 if(!userExist){
                     setUser(querySnap.docs[0].data());
                 }
-                setUser(querySnap.docs[0].data());
             }else{
                 setUser(null);
             }
