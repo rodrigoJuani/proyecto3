@@ -52,6 +52,7 @@ const ChatBox=()=>{
         </div>
     </div>)
     :<div className="chat-welcome">
+        <img src={assets.logo_icon} alt=""/>
     </div>
 }
 export default ChatBox
