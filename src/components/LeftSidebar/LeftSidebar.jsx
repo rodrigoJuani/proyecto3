@@ -99,7 +99,7 @@ const LeftSidebar=()=>{
             </div>
             <div className="ls-list">
             {showSearch && user
-            ? <div className="friends add-user">
+            ? <div onClick={addChat} className="friends add-user">
                 <img src={user.avatar} alt=""/>
                 <p>{user.name}</p>
             </div>
