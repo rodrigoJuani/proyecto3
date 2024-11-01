@@ -7,7 +7,7 @@ const ChatBox=()=>{
     const [input,setInput]=useState("");
 
 
-    return(
+    return chatUser ? (
     <div className="chat-box">
         <div className="chat-user">
             <img src={assets.profile_img} alt=''/>
@@ -51,5 +51,7 @@ const ChatBox=()=>{
             <img src={assets.send_button} al=''/> 
         </div>
     </div>)
+    :<div className="chat-welcome">
+    </div>
 }
 export default ChatBox
