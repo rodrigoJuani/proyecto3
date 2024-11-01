@@ -39,7 +39,8 @@ const AppContextProvider=(props)=>{
             console.error("Error loading user data:", error); 
         }
     }
-    useEffect(()=>{
+    //fun del tutorial
+    /*useEffect(()=>{
         if(userData){
             const chatRef=doc(db,'chats',userData.id);
             const unSub=onSnapshot(chatRef,async(res)=>{
@@ -57,8 +58,28 @@ const AppContextProvider=(props)=>{
                 unSub();
             }
         }
-    },[userData])
-    
+    },[userData])*/
+    ///Nueva fucion para evitar desborde
+    useEffect(() => {
+    if (userData && userData.id) {
+        const chatRef = doc(db, 'chats', userData.id);
+        const unSub = onSnapshot(chatRef, async (res) => {
+            const chatItems = res.data()?.chatsData || []; // Manejo de caso donde chatsData podría ser undefined
+            const tempData = [];
+            for (const item of chatItems) {
+                const userRef = doc(db, 'users', item.rId);
+                const userSnap = await getDoc(userRef);
+                const userData = userSnap.data();
+                tempData.push({ ...item, userData });
+            }
+            setChatData(tempData.sort((a, b) => b.updatedAt - a.updatedAt));
+        });
+        return () => {
+            unSub();
+        };
+    }
+}, [userData]);
+ 
 ///2:39 ultimo punto
     const value={
         userData,setUserData,
