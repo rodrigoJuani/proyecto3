@@ -42,8 +42,10 @@ const LeftSidebar = () => {
             }
         } catch (error) {
             console.error("Error fetching user:", error);
+            toast.error("Error fetching user: " + error.message); // Muestra el error en un toast
         }
     };
+    
     
     const addChat = async () => {
         const messagesRef = collection(db, "messages");
