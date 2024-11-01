@@ -21,11 +21,18 @@ const LeftSidebar = () => {
                 const userRef = collection(db, 'users');
                 const q = query(userRef, where("username", "==", input.toLowerCase()));
                 const querySnap = await getDocs(q);
-
-                if (!querySnap.empty && querySnap.docs[0].data().id !== userData.id) {
-                    let userExist = chatData.some(chat => chat.rId === querySnap.docs[0].data().id);
-                    if (!userExist) {
-                        setUser(querySnap.docs[0].data());
+    
+                console.log("Query Snapshot:", querySnap);
+                console.log("Documents:", querySnap.docs);
+    
+                if (!querySnap.empty) {
+                    const foundUser = querySnap.docs[0].data();
+                    console.log("Found User:", foundUser);
+                    if (foundUser.id !== userData.id) {
+                        let userExist = chatData.some(chat => chat.rId === foundUser.id);
+                        if (!userExist) {
+                            setUser(foundUser);
+                        }
                     }
                 } else {
                     setUser(null);
@@ -37,7 +44,7 @@ const LeftSidebar = () => {
             console.error("Error fetching user:", error);
         }
     };
-
+    
     const addChat = async () => {
         const messagesRef = collection(db, "messages");
         const chatsRef = collection(db, "chats");
