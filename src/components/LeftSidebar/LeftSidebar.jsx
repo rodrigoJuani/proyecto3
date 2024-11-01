@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import './LeftSidebar.css';
 import assets from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
@@ -10,8 +10,25 @@ import { toast } from "react-toastify";
 const LeftSidebar = () => {
     const navigate = useNavigate();
     const { userData, chatData, setChatUser, setMessagesId } = useContext(AppContext);
+    const [users, setUsers] = useState([]); // Estado para almacenar todos los usuarios
     const [user, setUser] = useState(null);
     const [showSearch, setShowSearch] = useState(false);
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const userRef = collection(db, 'users');
+                const querySnap = await getDocs(userRef);
+                const allUsers = querySnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setUsers(allUsers);
+            } catch (error) {
+                console.error("Error fetching users:", error);
+                toast.error("Error fetching users: " + error.message);
+            }
+        };
+
+        fetchUsers();
+    }, []);
 
     const inputHandler = async (e) => {
         try {
@@ -21,10 +38,10 @@ const LeftSidebar = () => {
                 const userRef = collection(db, 'users');
                 const q = query(userRef, where("username", "==", input.toLowerCase()));
                 const querySnap = await getDocs(q);
-    
+
                 console.log("Query Snapshot:", querySnap);
                 console.log("Documents:", querySnap.docs);
-    
+
                 if (!querySnap.empty) {
                     const foundUser = querySnap.docs[0].data();
                     console.log("Found User:", foundUser);
@@ -39,14 +56,14 @@ const LeftSidebar = () => {
                 }
             } else {
                 setShowSearch(false);
+                setUser(null); // Resetea el usuario cuando el input está vacío
             }
         } catch (error) {
             console.error("Error fetching user:", error);
-            toast.error("Error fetching user: " + error.message); // Muestra el error en un toast
+            toast.error("Error fetching user: " + error.message);
         }
     };
-    
-    
+
     const addChat = async () => {
         const messagesRef = collection(db, "messages");
         const chatsRef = collection(db, "chats");
@@ -110,12 +127,12 @@ const LeftSidebar = () => {
                         <p>{user.name}</p>
                     </div>
                 ) : (
-                    chatData && chatData.length > 0 ? (
-                        chatData.map((item, index) => (
+                    users.length > 0 ? (
+                        users.map((item, index) => (
                             <div onClick={() => setChat(item)} key={index} className="friends">
-                                <img src={item.userData?.avatar} alt="" />
+                                <img src={item.avatar} alt="" />
                                 <div>
-                                    <p>{item.userData?.name}</p>
+                                    <p>{item.name}</p>
                                     <span>{item.lastMessage}</span>
                                 </div>
                             </div>
