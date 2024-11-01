@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './ChatBox.css'
 import assets from "../../assets/assets";
 import { AppContext } from "../../context/AppContext";
@@ -7,6 +7,8 @@ const ChatBox=()=>{
     const [input,setInput]=useState("");
 
 
+    useEffect(()=>{
+    },[messagesId])
     return chatUser ? (
     <div className="chat-box">
         <div className="chat-user">
