@@ -98,3 +98,8 @@
     margin-bottom: 30px;
     border-radius: 10px;
 }
+.chat-welcome{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
