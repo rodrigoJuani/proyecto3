@@ -7,7 +7,9 @@ import { db } from "../../config/firebase";
 const ChatBox=()=>{
     const {userData,messagesId,chatUser,messages,setMessages}=useContext(AppContext);
     const [input,setInput]=useState("");
-
+    const sendMessage=async()=>{
+        try{}catch(error){}
+    }
 
     useEffect(()=>{
         if(messagesId){
