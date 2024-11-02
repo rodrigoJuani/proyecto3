@@ -13,6 +13,7 @@ const ChatBox=()=>{
                 await updateDoc(doc(db,'messages',messagesId),{
                     messages:arrayUnion({
                         sId:userData.id,
+                        text:input,
                     })
                 })
             }
