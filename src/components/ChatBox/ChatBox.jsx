@@ -14,6 +14,9 @@ const ChatBox=()=>{
             const usSub=onSnapshot(doc(db,'messages',messagesId),(res)=>{
                 setMessages(res.data().messages.reverse())
             })
+            return()=>{
+                unSub();
+            }
         }
     },[messagesId])
     return chatUser && chatUser.userData? (
