@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 
 const LeftSidebar = () => {
     const navigate = useNavigate();
-    const { userData, chatData, setChatUser, setMessagesId } = useContext(AppContext);
+    const { userData, chatData,chatUser, setChatUser,setMessagesId, MessagesId } = useContext(AppContext);
     const [users, setUsers] = useState([]); // Estado para almacenar todos los usuarios
     const [user, setUser] = useState(null);
     const [showSearch, setShowSearch] = useState(false);
@@ -73,8 +73,19 @@ const LeftSidebar = () => {
                 createAt: serverTimestamp(),
                 messages: []
             });
+    
+            // Aquí creamos el objeto item que necesitas
+            const item = {
+                messageId: newMessageRef.id,
+                rId: user.id, // ID del usuario con el que estás chateando
+                userData: {
+                    avatar: user.avatar, // Asegúrate de que 'user' tenga esta propiedad
+                    name: user.name, // Asegúrate de que 'user' tenga esta propiedad
+                }
+            };
+    
             await updateDoc(doc(chatsRef, user.id), {
-                chatData: arrayUnion({
+                chatsData: arrayUnion({
                     messageId: newMessageRef.id,
                     lastMessage: "",
                     rId: userData.id,
@@ -82,8 +93,9 @@ const LeftSidebar = () => {
                     messageSeen: true
                 })
             });
+    
             await updateDoc(doc(chatsRef, userData.id), {
-                chatData: arrayUnion({
+                chatsData: arrayUnion({
                     messageId: newMessageRef.id,
                     lastMessage: "",
                     rId: user.id,
@@ -91,12 +103,17 @@ const LeftSidebar = () => {
                     messageSeen: true
                 })
             });
+    
+            // Establece el chatUser después de crear el chat
+            setChatUser(item); // Aquí estableces el chatUser
+    
         } catch (error) {
             toast.error(error.message);
+            console.error(error);
         }
     };
-
-    const setChat = (item) => {
+    
+    const setChat = async (item) => {
         setMessagesId(item.messageId);
         setChatUser(item);
     };
@@ -123,7 +140,7 @@ const LeftSidebar = () => {
             <div className="ls-list">
                 {showSearch && user ? (
                     <div onClick={addChat} className="friends add-user">
-                        <img src={user.avatar} alt="" />
+                        <img src={userData.avatar} alt="" /> 
                         <p>{user.name}</p>
                     </div>
                 ) : (

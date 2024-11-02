@@ -9,7 +9,7 @@ const ChatBox=()=>{
 
     useEffect(()=>{
     },[messagesId])
-    return chatUser ? (
+    return chatUser && chatUser.userData? (
     <div className="chat-box">
         <div className="chat-user">
             <img src={chatUser.userData.avatar} alt=''/>
