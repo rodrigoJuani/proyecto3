@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import './ChatBox.css'
 import assets from "../../assets/assets";
 import { AppContext } from "../../context/AppContext";
-import { onSnapshot } from "firebase/firestore";
+import { doc,onSnapshot } from "firebase/firestore";
 import { db } from "../../config/firebase";
 const ChatBox=()=>{
     const {userData,messagesId,chatUser,messages,setMessages}=useContext(AppContext);
@@ -12,6 +12,7 @@ const ChatBox=()=>{
     useEffect(()=>{
         if(messagesId){
             const usSub=onSnapshot(doc(db,'messages',messagesId),(res)=>{
+                setMessages(res.data().messages.reverse())
             })
         }
     },[messagesId])
