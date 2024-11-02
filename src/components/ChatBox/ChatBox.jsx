@@ -14,6 +14,7 @@ const ChatBox=()=>{
                     messages:arrayUnion({
                         sId:userData.id,
                         text:input,
+                        createdAt:new Date()
                     })
                 })
             }
