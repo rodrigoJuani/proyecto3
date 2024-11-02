@@ -2,14 +2,16 @@ import React, { useContext, useEffect, useState } from "react";
 import './ChatBox.css'
 import assets from "../../assets/assets";
 import { AppContext } from "../../context/AppContext";
-import { doc,onSnapshot } from "firebase/firestore";
+import { doc,onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 const ChatBox=()=>{
     const {userData,messagesId,chatUser,messages,setMessages}=useContext(AppContext);
     const [input,setInput]=useState("");
     const sendMessage=async()=>{
         try{
-            if(input && messagesId){}
+            if(input && messagesId){
+                await updateDoc(doc(db,'messages',messagesId),{})
+            }
         }catch(error){}
     }
 
