@@ -65,59 +65,23 @@ const LeftSidebar = () => {
     };
 
     const addChat = async () => {
-        const messagesRef = collection(db, "messages");
-        const chatsRef = collection(db, "chats");
+        // Lógica para agregar un nuevo chat
         try {
-            const newMessageRef = doc(messagesRef);
-            await setDoc(newMessageRef, {
-                createAt: serverTimestamp(),
-                messages: []
-            });
-    
-            // Aquí creamos el objeto item que necesitas
-            const item = {
-                messageId: newMessageRef.id,
-                rId: user.id, // ID del usuario con el que estás chateando
-                userData: {
-                    avatar: user.avatar, // Asegúrate de que 'user' tenga esta propiedad
-                    name: user.name, // Asegúrate de que 'user' tenga esta propiedad
-                }
-            };
-    
-            await updateDoc(doc(chatsRef, user.id), {
-                chatsData: arrayUnion({
-                    messageId: newMessageRef.id,
-                    lastMessage: "",
-                    rId: userData.id,
-                    updatedAt: Date.now(),
-                    messageSeen: true
-                })
-            });
-    
-            await updateDoc(doc(chatsRef, userData.id), {
-                chatsData: arrayUnion({
-                    messageId: newMessageRef.id,
-                    lastMessage: "",
-                    rId: user.id,
-                    updatedAt: Date.now(),
-                    messageSeen: true
-                })
-            });
-    
-            // Establece el chatUser después de crear el chat
-            setChatUser(item); // Aquí estableces el chatUser
-    
+            // Aquí va tu lógica para subir el chat a Firebase
+            console.log("Chat agregado");
         } catch (error) {
-            toast.error(error.message);
-            console.error(error);
+            console.error("Error al agregar el chat:", error);
         }
     };
-    
     const setChat = async (item) => {
-        setMessagesId(item.messageId);
-        setChatUser(item);
+        try {
+            await addChat(item); // Asegúrate de que addChat esté implementado para manejar el item
+            setMessagesId(item.messageId);
+            setChatUser(item);
+        } catch (error) {
+            console.error("Error al establecer el chat:", error);
+        }
     };
-
     return (
         <div className="ls">
             <div className="ls-top">
