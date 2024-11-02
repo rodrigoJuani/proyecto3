@@ -8,6 +8,8 @@ const ChatBox=()=>{
 
 
     useEffect(()=>{
+        if(messagesId){
+        }
     },[messagesId])
     return chatUser && chatUser.userData? (
     <div className="chat-box">
