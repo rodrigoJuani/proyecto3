@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import './LeftSidebar.css';
 import assets from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
-import { arrayUnion, collection, doc, getDocs, query, serverTimestamp, setDoc, updateDoc, where } from "firebase/firestore";
+import { arrayUnion, collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, updateDoc, where } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
@@ -77,6 +77,7 @@ const LeftSidebar = () => {
         setMessagesId(item.messageId);
         setChatUser(item)
         const userChatsRef=doc(db,'chats',userData.id);
+        const userChatsSnapshot=await getDoc(userChatsRef);
     };
     return (
         <div className="ls">
