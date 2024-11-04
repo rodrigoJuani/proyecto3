@@ -4,6 +4,7 @@ import assets from "../../assets/assets";
 import { AppContext } from "../../context/AppContext";
 import { arrayUnion, doc,onSnapshot, Timestamp, updateDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { toast } from "react-toastify";
 const ChatBox=()=>{
     const {userData,messagesId,chatUser,messages,setMessages}=useContext(AppContext);
     const [input,setInput]=useState("");
@@ -71,7 +72,9 @@ const ChatBox=()=>{
 
 
             }
-        } catch(error){}
+        } catch(error){
+            toast.error(error.message)
+        }
     }
     const convertTimestamp=(timestamp)=>{
         let date=timestamp.toDate();
