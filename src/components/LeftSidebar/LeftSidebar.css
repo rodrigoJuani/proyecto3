@@ -101,4 +101,6 @@
 .menu:hover .sub-menu{
     display: block;
 }
-
+.friends.border img {
+    border: ;
+}
