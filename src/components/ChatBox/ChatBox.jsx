@@ -23,7 +23,9 @@ const ChatBox=()=>{
                     const userChatsSnapshot=await getDoc(userChatsRef);
                     if(userChatsSnapshot.exists()){
                         const userChatData=userChatsSnapshot.data();
-                        const chatIndex=userChatData.chatsData.findIndex((c)=>c.messagesId===messagesId)
+                        const chatIndex=userChatData.chatsData.findIndex((c)=>c.messagesId===messagesId);
+                        userChatData.chatsData[chatIndex].lastMessage=input.slice(0,30);
+                        userChatData.chatsData[chatIndex].updateAt=Date.now();
                     }
                 })
             }
