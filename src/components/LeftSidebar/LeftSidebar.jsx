@@ -78,6 +78,7 @@ const LeftSidebar = () => {
         setChatUser(item)
         const userChatsRef=doc(db,'chats',userData.id);
         const userChatsSnapshot=await getDoc(userChatsRef);
+        const userChatData=userChatsSnapshot.data();
     };
     return (
         <div className="ls">
