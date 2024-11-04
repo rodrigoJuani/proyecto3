@@ -49,6 +49,27 @@ const ChatBox=()=>{
                         createdAt:new Date()
                     })
                 })
+
+
+                const usersIDs=[chatUser.rId,userData.id];
+                usersIDs.forEach(async(id)=>{
+                    const userChatsRef=doc(db,'chats',id);
+                    const userChatsSnapshot=await getDoc(userChatsRef);
+                    if(userChatsSnapshot.exists()){
+                        const userChatData=userChatsSnapshot.data();
+                        const chatIndex=userChatData.chatsData.findIndex((c)=>c.messagesId===messagesId);
+                        userChatData.chatsData[chatIndex].lastMessage="Image";
+                        userChatData.chatsData[chatIndex].updateAt=Date.now();
+                        if(userChatData.chatsData[chatIndex].rId===userData.id){
+                            userChatData.chatsData[chatIndex].messageSeen=false;
+                        }
+                        await updateDoc(userChatsRef,{
+                            chatsData:userChatData.chatsData
+                        })
+                    }
+                })
+
+
             }
         } catch(error){}
     }
