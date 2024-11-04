@@ -20,6 +20,11 @@ const ChatBox=()=>{
                 const usersIDs=[chatUser.rId,userData.id];
                 usersIDs.forEach(async(id)=>{
                     const userChatsRef=doc(db,'chats',id);
+                    const userChatsSnapshot=await getDoc(userChatsRef);
+                    if(userChatsSnapshot.exists()){
+                        const userChatData=userChatsSnapshot.data();
+                        const chatIndex=userChatData.chatsData.findIndex((c)=>c.messagesId===messagesId)
+                    }
                 })
             }
         }catch(error){}
