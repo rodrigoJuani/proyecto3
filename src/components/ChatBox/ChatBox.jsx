@@ -17,6 +17,10 @@ const ChatBox=()=>{
                         createdAt:new Date()
                     })
                 })
+                const usersIDs=[chatUser.rId,userData.id];
+                usersIDs.forEach(async(id)=>{
+                    const userChatsRef=doc(db,'chats',id);
+                })
             }
         }catch(error){}
     }
@@ -28,7 +32,7 @@ const ChatBox=()=>{
                 await updateDoc(doc(db,'messages',messagesId),{
                     messages:arrayUnion({
                         sId:userData.id,
-                        text:input,
+                        image:fileUrl,
                         createdAt:new Date()
                     })
                 })
