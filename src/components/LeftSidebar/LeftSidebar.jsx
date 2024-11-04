@@ -83,9 +83,11 @@ const LeftSidebar = () => {
         const chatIndex=userChatsData.chatsData.findIndex((c)=>c.messageId===item.messageId);
         userChatsData.chatsData[chatIndex].messageSeen=true;
         await updateDoc(userChatsRef,{
-            chatData:userChatsData.chatsData
+            chatsData:userChatsData.chatsData//chatData
         })
-        }catch(error){}
+        }catch(error){
+            toast.error(error.message)
+        }
         
     };
     return (
