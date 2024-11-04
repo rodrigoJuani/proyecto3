@@ -26,6 +26,12 @@ const ChatBox=()=>{
                         const chatIndex=userChatData.chatsData.findIndex((c)=>c.messagesId===messagesId);
                         userChatData.chatsData[chatIndex].lastMessage=input.slice(0,30);
                         userChatData.chatsData[chatIndex].updateAt=Date.now();
+                        if(userChatData.chatsData[chatIndex].rId===userData.id){
+                            userChatData.chatsData[chatIndex].messageSeen=false;
+                        }
+                        await updateDoc(userChatsRef,{
+                            chatsData:userChatData.chatsData
+                        })
                     }
                 })
             }
