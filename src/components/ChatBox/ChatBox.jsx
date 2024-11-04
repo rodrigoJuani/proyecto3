@@ -23,9 +23,8 @@ const ChatBox=()=>{
 
     useEffect(()=>{
         if(messagesId){
-            const usSub=onSnapshot(doc(db,'messages',messagesId),(res)=>{
+            const unSub=onSnapshot(doc(db,'messages',messagesId),(res)=>{
                 setMessages(res.data().messages.reverse())
-                console.log(res.data().messages.reverse());
             })
             return()=>{
                 unSub();
@@ -41,13 +40,9 @@ const ChatBox=()=>{
         </div>
 
             <div className="chat-msg">
-                <div className="s-msg">
-                    <p className="msg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium illo soluta unde facilis asperiores minus.</p>
-                    <div>
-                    <img src={assets.profile_img} alt=''/>
-                    <p>2:30 PM</p>
-                    </div>
-                </div>
+            {messages.map((msg,index)=>(
+
+            ))}
 
                 <div className="s-msg">
                     <img className="msg-img" src={assets.pic1} alt=""/>
