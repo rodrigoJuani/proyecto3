@@ -74,8 +74,8 @@ const LeftSidebar = () => {
         }
     };
     const setChat = async (item) => {
-        try{}catch(error){}
-        setMessagesId(item.messageId);
+        try{
+            setMessagesId(item.messageId);
         setChatUser(item)
         const userChatsRef=doc(db,'chats',userData.id);
         const userChatsSnapshot=await getDoc(userChatsRef);
@@ -85,6 +85,8 @@ const LeftSidebar = () => {
         await updateDoc(userChatsRef,{
             chatData:userChatsData.chatsData
         })
+        }catch(error){}
+        
     };
     return (
         <div className="ls">
