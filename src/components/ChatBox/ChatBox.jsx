@@ -22,6 +22,9 @@ const ChatBox=()=>{
     }
 
     const sendImage=async(e)=>{
+        try{
+            const fileUrl=await upload(e.target.files[0])
+        } catch(error){}
     }
     const convertTimestamp=(timestamp)=>{
         let date=timestamp.toDate();
