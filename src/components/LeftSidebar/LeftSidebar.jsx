@@ -78,7 +78,8 @@ const LeftSidebar = () => {
         setChatUser(item)
         const userChatsRef=doc(db,'chats',userData.id);
         const userChatsSnapshot=await getDoc(userChatsRef);
-        const userChatData=userChatsSnapshot.data();
+        const userChatsData=userChatsSnapshot.data();
+        const chatIndex=userChatsData.chatData.findIndex((c)=>c.messageId===item.messageId);
     };
     return (
         <div className="ls">
