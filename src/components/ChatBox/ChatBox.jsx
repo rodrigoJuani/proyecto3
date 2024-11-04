@@ -55,7 +55,7 @@ const ChatBox=()=>{
                     <p className="msg">{msg.text}</p>
                 <div>
                 <img src={msg.sId===userData.id? userData.avatar: chatUser.userData.avatar} alt=''/>
-                <p>2:30 PM</p>
+                <p>{convertTimestamp(msg.createdAt)}</p>
                 </div>
                 </div>
             
