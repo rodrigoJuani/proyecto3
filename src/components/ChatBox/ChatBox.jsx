@@ -42,9 +42,9 @@ const ChatBox=()=>{
             <div className="chat-msg">
             {messages.map((msg,index)=>(
                 <div key={index} className={msg.sId===userData.id ? "s-msg" : "r-msg"}>
-                <img className="msg-img" src={assets.pic1} alt=""/>
+                    <p className="msg">{msg.text}</p>
                 <div>
-                <img src={assets.profile_img} alt=''/>
+                <img src={msg.sId===userData.id? userData.avatar: chatUser.userData.avatar} alt=''/>
                 <p>2:30 PM</p>
                 </div>
                 </div>
