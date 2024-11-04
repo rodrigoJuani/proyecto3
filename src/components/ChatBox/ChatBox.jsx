@@ -25,6 +25,11 @@ const ChatBox=()=>{
         let date=timestamp.toDate();
         const hour=date.getHours();
         const minute=date.getMinutes();
+        if(hours>12){
+            return hour-12+":"+minute+" PM";
+        }else{
+            return hour+":"+minute+" AM";
+        }
     }
     useEffect(()=>{
         if(messagesId){
