@@ -102,5 +102,8 @@
     display: block;
 }
 .friends.border img {
-    border: ;
+    border: 3px solid #07fff3;
+}
+.friends.border div span{
+    color: #07fff3;
 }
