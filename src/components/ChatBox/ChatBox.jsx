@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import './ChatBox.css'
 import assets from "../../assets/assets";
 import { AppContext } from "../../context/AppContext";
-import { arrayUnion, doc,onSnapshot, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc,onSnapshot, Timestamp, updateDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 const ChatBox=()=>{
     const {userData,messagesId,chatUser,messages,setMessages}=useContext(AppContext);
     const [input,setInput]=useState("");
-    const sendMessage=async()=>{
+    const sendMessage=async(id)=>{
         try{
             if(input && messagesId){
                 await updateDoc(doc(db,'messages',messagesId),{
@@ -21,6 +21,11 @@ const ChatBox=()=>{
         }catch(error){}
     }
 
+    const convertTimestamp=(timestamp)=>{
+        let date=timestamp.toDate();
+        const hour=date.getHours();
+        const minute=date.getMinutes();
+    }
     useEffect(()=>{
         if(messagesId){
             const unSub=onSnapshot(doc(db,'messages',messagesId),(res)=>{
