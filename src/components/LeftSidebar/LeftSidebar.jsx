@@ -110,10 +110,10 @@ const LeftSidebar = () => {
                 ) : (
                     users.length > 0 ? (
                         users.map((item, index) => (
-                            <div onClick={() => setChat(item)} key={index} className="friends">
-                                <img src={item.avatar} alt="" />
+                            <div onClick={() => setChat(item)} key={index} className={`friends ${item.messageSeen || }`}>
+                                <img src={item.userData.avatar} alt="" />
                                 <div>
-                                    <p>{item.name}</p>
+                                    <p>{item.userData.name}</p>
                                     <span>{item.lastMessage}</span>
                                 </div>
                             </div>
