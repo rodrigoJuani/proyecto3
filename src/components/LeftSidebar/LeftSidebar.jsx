@@ -46,7 +46,7 @@ const LeftSidebar = () => {
                     const foundUser = querySnap.docs[0].data();
                     console.log("Found User:", foundUser);
                     if (foundUser.id !== userData.id) {
-                        let userExist = chatData.some(chat => chat.rId === foundUser.id);
+                        let userExist = chatsData.some(chat => chat.rId === foundUser.id);//chatsData
                         if (!userExist) {
                             setUser(foundUser);
                         }
@@ -79,7 +79,8 @@ const LeftSidebar = () => {
         const userChatsRef=doc(db,'chats',userData.id);
         const userChatsSnapshot=await getDoc(userChatsRef);
         const userChatsData=userChatsSnapshot.data();
-        const chatIndex=userChatsData.chatData.findIndex((c)=>c.messageId===item.messageId);
+        const chatIndex=userChatsData.chatsData.findIndex((c)=>c.messageId===item.messageId);
+        userChatsData.chatsData[chatIndex].messageSeen=true;
     };
     return (
         <div className="ls">
