@@ -21,6 +21,8 @@ const ChatBox=()=>{
         }catch(error){}
     }
 
+    const sendImage=async(e)=>{
+    }
     const convertTimestamp=(timestamp)=>{
         let date=timestamp.toDate();
         const hour=date.getHours();
@@ -67,7 +69,7 @@ const ChatBox=()=>{
 
         <div className="chat-input">
             <input onChange={(e)=>setInput(e.target.value)} value={input} type="text" placeholder="Send a Message" />
-            <input type="file" id="image" accept="image/png,image/jpeg" hidden/>
+            <input onChange={sendImage} type="file" id="image" accept="image/png,image/jpeg" hidden/>
             <label htmlFor="image">
                 <img src={assets.gallery_icon} alt=""/>
             </label>
