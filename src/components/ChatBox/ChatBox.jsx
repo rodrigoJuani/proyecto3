@@ -24,6 +24,15 @@ const ChatBox=()=>{
     const sendImage=async(e)=>{
         try{
             const fileUrl=await upload(e.target.files[0])
+            if(fileUrl && messagesId){
+                await updateDoc(doc(db,'messages',messagesId),{
+                    messages:arrayUnion({
+                        sId:userData.id,
+                        text:input,
+                        createdAt:new Date()
+                    })
+                })
+            }
         } catch(error){}
     }
     const convertTimestamp=(timestamp)=>{
