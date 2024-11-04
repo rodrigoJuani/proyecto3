@@ -82,7 +82,7 @@ const LeftSidebar = () => {
         const chatIndex=userChatsData.chatsData.findIndex((c)=>c.messageId===item.messageId);
         userChatsData.chatsData[chatIndex].messageSeen=true;
         await updateDoc(userChatsRef,{
-            chatData:
+            chatData:userChatsData.chatsData
         })
     };
     return (
