@@ -74,6 +74,7 @@ const LeftSidebar = () => {
         }
     };
     const setChat = async (item) => {
+        try{}catch(error){}
         setMessagesId(item.messageId);
         setChatUser(item)
         const userChatsRef=doc(db,'chats',userData.id);
