@@ -74,13 +74,9 @@ const LeftSidebar = () => {
         }
     };
     const setChat = async (item) => {
-        try {
-            await addChat(item); // Asegúrate de que addChat esté implementado para manejar el item
-            setMessagesId(item.messageId);
-            setChatUser(item);
-        } catch (error) {
-            console.error("Error al establecer el chat:", error);
-        }
+        setMessagesId(item.messageId);
+        setChatUser(item)
+        const userChatsRef=doc(db,'chats',userData.id);
     };
     return (
         <div className="ls">
