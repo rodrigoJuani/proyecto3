@@ -13,6 +13,7 @@ const RightSidebar=()=>{
                 tempVar.push(msg.image)
             }
         })
+        setMsgImages(tempVar);
     },[messages])
     return chatUser ?(
     <div className="rs">
