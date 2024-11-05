@@ -9,7 +9,9 @@ const RightSidebar=()=>{
     useEffect(()=>{
         let tempVar=[];
         messages.map((msg)=>{
-            if(msg.image){}
+            if(msg.image){
+                tempVar.push(msg.image)
+            }
         })
     },[messages])
     return chatUser ?(
