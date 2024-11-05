@@ -27,7 +27,7 @@ const RightSidebar=()=>{
             <p>Media</p>
             <div>{
                 msgImages.map((url,index)=>(
-                    <image key={index} src={url} />
+                    <image onClick={()=>window.open(url)} key={index} src={url} />
                 ))
                 }
                 {
