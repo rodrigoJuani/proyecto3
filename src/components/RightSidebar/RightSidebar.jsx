@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import './RightSidebar.css'
 import assets from "../../assets/assets"
 import { logout } from "../../config/firebase";
 import { AppContext } from "../../context/AppContext";
 const RightSidebar=()=>{
     const {chatUser,messages}=useContext(AppContext)
+    useEffect(()=>{
+    },[messages])
     return chatUser ?(
     <div className="rs">
         <div className="rs-profile">
