@@ -26,7 +26,8 @@ const RightSidebar=()=>{
         </div>
         <button onClick={()=>logout()}>Logout</button>
     </div>)
-    :(<div>
+    :(<div className="rs">
+        <button onClick={()=>logout()}>Logout</button>
     </div>
     )
 }
