@@ -5,7 +5,7 @@ import { logout } from "../../config/firebase";
 import { AppContext } from "../../context/AppContext";
 const RightSidebar=()=>{
     const {chatUser,messages}=useContext(AppContext)
-    return(
+    return chatUser ?(
     <div className="rs">
         <div className="rs-profile">
             <img src={assets.profile_img} alt=""/>
@@ -26,6 +26,9 @@ const RightSidebar=()=>{
         </div>
         <button onClick={()=>logout()}>Logout</button>
     </div>)
+    :(<div>
+    </div>
+    )
 }
 
 export default RightSidebar
