@@ -69,8 +69,11 @@ const LeftSidebar = () => {
         const chatsRef=collection(db,"chats");
         // Lógica para agregar un nuevo chat
         try {
-            // Aquí va tu lógica para subir el chat a Firebase
-            console.log("Chat agregado");
+            const messagesRef=doc(messagesRef);
+            await setDoc(newMessageRed,{
+                createAt:serverTimestamp(),
+                messages:[]
+            })
         } catch (error) {
             console.error("Error al agregar el chat:", error);
         }
