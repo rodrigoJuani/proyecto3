@@ -74,6 +74,7 @@ const LeftSidebar = () => {
                 createAt:serverTimestamp(),
                 messages:[]
             })
+            await updateDoc(doc(chatsRef,user.id),{})
         } catch (error) {
             console.error("Error al agregar el chat:", error);
         }
