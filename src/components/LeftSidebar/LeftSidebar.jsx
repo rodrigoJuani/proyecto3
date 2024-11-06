@@ -65,6 +65,8 @@ const LeftSidebar = () => {
     };
 
     const addChat = async () => {
+        const messagesRef=collection(db,"messages");
+        const chatsRef=collection(db,"chats");
         // Lógica para agregar un nuevo chat
         try {
             // Aquí va tu lógica para subir el chat a Firebase

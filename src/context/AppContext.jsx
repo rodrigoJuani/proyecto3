@@ -62,8 +62,8 @@ const AppContextProvider=(props)=>{
     ///Nueva fucion para evitar desborde
     useEffect(() => {
     if (userData && userData.id) {
-        const chatRef = doc(db, 'chats', userData.id);
-        const unSub = onSnapshot(chatRef, async (res) => {
+        const chatsRef = doc(db, 'chats', userData.id);
+        const unSub = onSnapshot(chatsRef, async (res) => {
             const chatItems = res.data()?.chatsData || []; // Manejo de caso donde chatsData podría ser undefined
             const tempData = [];
             for (const item of chatItems) {
