@@ -100,7 +100,7 @@ const ChatBox=()=>{
     <div className="chat-box">
         <div className="chat-user">
             <img src={chatUser.userData.avatar} alt=''/>
-            <p>{chatUser.userData.name} {} </p>
+            <p>{chatUser.userData.name} {Date.now} </p>
             <img src={assets.help_icon} className="help" alt=""/>
         </div>
 
