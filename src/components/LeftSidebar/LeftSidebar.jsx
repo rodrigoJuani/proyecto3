@@ -77,7 +77,9 @@ const LeftSidebar = () => {
             await updateDoc(doc(chatsRef,user.id),{
                 chatsData:arrayUnion({
                     messageId:newMessageRef.id,
-                    lastMessage:""
+                    lastMessage:"",
+                    rId:userData.id,
+                    updateAt:Date.now(),
                 })
             })
         } catch (error) {
