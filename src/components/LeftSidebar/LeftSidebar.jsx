@@ -70,11 +70,16 @@ const LeftSidebar = () => {
         // Lógica para agregar un nuevo chat
         try {
             const messagesRef=doc(messagesRef);
-            await setDoc(newMessageRed,{
+            await setDoc(newMessageRef,{
                 createAt:serverTimestamp(),
                 messages:[]
             })
-            await updateDoc(doc(chatsRef,user.id),{})
+            await updateDoc(doc(chatsRef,user.id),{
+                chatsData:arrayUnion({
+                    messageId:newMessageRef.id,
+                    lastMessage:""
+                })
+            })
         } catch (error) {
             console.error("Error al agregar el chat:", error);
         }
