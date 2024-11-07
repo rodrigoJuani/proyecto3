@@ -19,7 +19,7 @@ const RightSidebar=()=>{
     <div className="rs">
         <div className="rs-profile">
             <img src={chatUser.userData.avatar} alt=""/>
-            <h3>{chatUser.userData.name}<img src={assets.green_dot} className="dot" alt=""/></h3>
+            <h3>{chatUser.userData.name}</h3>
             <p>{chatUser.userData.bio}</p>
         </div>
         <hr/>
