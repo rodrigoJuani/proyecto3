@@ -42,15 +42,15 @@ const LeftSidebar = () => {
                 console.log("Query Snapshot:", querySnap);
                 console.log("Documents:", querySnap.docs);
 
-                if (!querySnap.empty) {
-                    const foundUser = querySnap.docs[0].data();
-                    console.log("Found User:", foundUser);
-                    if (foundUser.id !== userData.id) {
-                        let userExist = chatsData.some(chat => chat.rId === foundUser.id);//chatsData
+                if (!querySnap.empty && querySnap.docs[0].data().id!==userData.id) {
+                    let userExist=false;
+                    chatData.map((user)=>{
+                        userExist=true;
+                    })
                         if (!userExist) {
-                            setUser(foundUser);
+                            setUser(querySnap.docs[0].data());
                         }
-                    }
+                    
                 } else {
                     setUser(null);
                 }
@@ -139,8 +139,8 @@ const LeftSidebar = () => {
                         <p>{user.name}</p>
                     </div>
                 ) : (
-                    users.length > 0 ? (
-                        users.map((item, index) => (
+                    chatData.length > 0 ? (
+                        chatData.map((item, index) => (
                             <div onClick={() => setChat(item)} key={index} className={`friends ${item.messageSeen || item.messageId===messageId? "":"border"}`}>
                                 <img src={item.userData.avatar} alt="" />
                                 <div>

@@ -130,8 +130,9 @@ const ChatBox=()=>{
                 <img src={assets.gallery_icon} alt=""/>
             </label>
             <img src={assets.send_button} al=''/> 
+            </div>
         </div>
-    </div>)
+    )
     :<div className="chat-welcome">
         <img src={assets.logo_icon} alt=""/>
         <p>Chat anytime, anywhere</p>
