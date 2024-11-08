@@ -64,15 +64,19 @@ const ProfileUpdate = () => {
                 setUid(user.uid);
                 const docRef = doc(db, "users", user.uid);
                 const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    setName(docSnap.data().name || "");
-                    setBio(docSnap.data().bio || "");
-                    setPrevImage(docSnap.data().avatar || "");
+                if(docSnap.data().name){
+                    setName(docSnap.data().name);
+                }
+                if(docSnap.data().bio){
+                    setName(docSnap.data().bio);
+                }
+                if(docSnap.data().avatar){
+                    setName(docSnap.data().avatar);
                 }
             } else {
-                navigate('/');
+                navigate('/')
             }
-        });
+        })
         return () => unsubscribe();
     }, [navigate]);
 
