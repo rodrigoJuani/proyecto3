@@ -14,10 +14,8 @@ const Login=()=> {
     try {
         if (currState === "Sign up") {
             await signup(userName, email, password);
-            // Puedes agregar un mensaje de éxito aquí o redirigir al usuario
         } else {
-            await login(email, password);
-            // Puedes agregar un mensaje de éxito aquí o redirigir al usuario
+            await login(email, password);ç
         }
     } catch (error) {
         console.error("Error:", error);
