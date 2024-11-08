@@ -67,9 +67,8 @@ const LeftSidebar = () => {
     const addChat = async () => {
         const messagesRef=collection(db,"messages");
         const chatsRef=collection(db,"chats");
-        // Lógica para agregar un nuevo chat
         try {
-            const messagesRef=doc(messagesRef);
+            const newMessageRef=doc(messagesRef);
             await setDoc(newMessageRef,{
                 createAt:serverTimestamp(),
                 messages:[]
@@ -93,6 +92,7 @@ const LeftSidebar = () => {
                 })
             })
         } catch (error) {
+            toast.error(error.message);
             console.error("Error al agregar el chat:", error);
         }
     };
@@ -135,7 +135,7 @@ const LeftSidebar = () => {
             <div className="ls-list">
                 {showSearch && user ? (
                     <div onClick={addChat} className="friends add-user">
-                        <img src={userData.avatar} alt="" /> 
+                        <img src={user.avatar} alt="" /> 
                         <p>{user.name}</p>
                     </div>
                 ) : (

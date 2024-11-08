@@ -50,13 +50,13 @@ const AppContextProvider=(props)=>{
                 const userRef = doc(db, 'users', item.rId);
                 const userSnap = await getDoc(userRef);
                 const userData = userSnap.data();
-                tempData.push({ ...item, userData });
+                tempData.push({ ...item, userData })
             }
-            setChatData(tempData.sort((a, b) => b.updatedAt - a.updatedAt));
-        });
+            setChatData(tempData.sort((a, b) => b.updatedAt - a.updatedAt))
+        })
         return () => {
             unSub();
-        };
+        }
     }
 }, [userData]);
 

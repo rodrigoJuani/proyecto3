@@ -41,7 +41,7 @@ const ProfileUpdate = () => {
                     avatar: imgUrl,
                     bio: bio,
                     name: name
-                });
+                })
             } else {
                 await updateDoc(docRef, {
                     bio: bio,
