@@ -21,18 +21,18 @@ const AppContextProvider=(props)=>{
             const userData=userSnap.data();
             setUserData(userData);
             if(userData.avatar && userData.name){
-                navigate('/chat');
+                navigate('/chat')
             }else{
-                navigate('/profile');
+                navigate('/profile')
             }
             await updateDoc(userRef,{
                 lastSeen:Date.now()
-            });
+            })
             setInterval(async ()=>{
                 if(auth.chatUser){
                     await updateDoc(userRef,{
                         lastSeen:Date.now()
-                    });
+                    })
                 }
             },60000);
         }catch(error){
@@ -59,8 +59,7 @@ const AppContextProvider=(props)=>{
         };
     }
 }, [userData]);
- 
-///2:39 ultimo punto
+
     const value={
         userData,setUserData,
         chatData,setChatData,
