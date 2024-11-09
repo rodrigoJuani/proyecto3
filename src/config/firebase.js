@@ -23,7 +23,6 @@ const signup = async (username, email, password) => {
     try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         const user = res.user;
-        
         // Crear el documento de usuario
         await setDoc(doc(db, "users", user.uid), {
             id: user.uid,
@@ -34,7 +33,6 @@ const signup = async (username, email, password) => {
             bio: "Hey there, I am using chat app",
             lastSeen: Date.now()
         });
-        
         // Crear el documento de chat para el usuario con estructura inicial
         await setDoc(doc(db, "chats", user.uid), {
             chatsData: []
