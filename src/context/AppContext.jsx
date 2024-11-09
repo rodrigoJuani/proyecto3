@@ -10,7 +10,7 @@ const AppContextProvider=(props)=>{
     const navigate=useNavigate();
     const[userData,setUserData]=useState(null);
     const[chatData,setChatData]=useState(null);
-    const [messagesId,setMessagesId]=useState(null);
+    const[messagesId,setMessagesId]=useState(null);
     const[messages,setMessages]=useState([]);
     const[chatUser,setChatUser]=useState(null);
 
@@ -44,7 +44,7 @@ const AppContextProvider=(props)=>{
     if (userData && userData.id) {
         const chatsRef = doc(db, 'chats', userData.id);
         const unSub = onSnapshot(chatsRef, async (res) => {
-            const chatItems = res.data()?.chatsData || []; // Manejo de caso donde chatsData podría ser undefined
+            const chatItems = res.data()?.chatsData || []; 
             const tempData = [];
             for (const item of chatItems) {
                 const userRef = doc(db, 'users', item.rId);

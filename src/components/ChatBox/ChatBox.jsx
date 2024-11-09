@@ -18,8 +18,8 @@ const ChatBox=()=>{
                         createdAt:new Date()
                     })
                 })
-                const usersIDs=[chatUser.rId,userData.id];
-                usersIDs.forEach(async(id)=>{
+                const userIDs=[chatUser.rId,userData.id];
+                userIDs.forEach( async(id)=>{
                     const userChatsRef=doc(db,'chats',id);
                     const userChatsSnapshot=await getDoc(userChatsRef);
                     if(userChatsSnapshot.exists()){
@@ -37,11 +37,12 @@ const ChatBox=()=>{
                 })
             }
         }catch(error){}
+        setInput("");
     }
 
     const sendImage=async(e)=>{
         try{
-            const fileUrl=await upload(e.target.files[0])
+            const fileUrl=await upload(e.target.files[0]);
             if(fileUrl && messagesId){
                 await updateDoc(doc(db,'messages',messagesId),{
                     messages:arrayUnion({
@@ -96,6 +97,8 @@ const ChatBox=()=>{
             }
         }
     },[messagesId])
+
+
     return chatUser && chatUser.userData? (
     <div className="chat-box">
         <div className="chat-user">
@@ -129,7 +132,7 @@ const ChatBox=()=>{
             <label htmlFor="image">
                 <img src={assets.gallery_icon} alt=""/>
             </label>
-            <img src={assets.send_button} al=''/> 
+            <img onClick={sendMessage} src={assets.send_button} al=''/> 
             </div>
         </div>
     )

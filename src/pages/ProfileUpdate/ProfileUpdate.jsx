@@ -68,10 +68,10 @@ const ProfileUpdate = () => {
                     setName(docSnap.data().name);
                 }
                 if(docSnap.data().bio){
-                    setName(docSnap.data().bio);
+                    setBio(docSnap.data().bio);
                 }
                 if(docSnap.data().avatar){
-                    setName(docSnap.data().avatar);
+                    setPrevImage(docSnap.data().avatar);
                 }
             } else {
                 navigate('/')
