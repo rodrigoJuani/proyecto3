@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import './LeftSidebar.css';
 import assets from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
-import { arrayUnion, collection, doc, getDocs, query, serverTimestamp, setDoc, updateDoc, where } from "firebase/firestore";
+import { arrayUnion, collection, doc, getDocs,getDoc, query, serverTimestamp, setDoc, updateDoc, where } from "firebase/firestore";///añadi getDoc
 import { db } from "../../config/firebase";
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
