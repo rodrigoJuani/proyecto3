@@ -99,22 +99,39 @@ const LeftSidebar = () => {
         }
     };
     const setChat = async (item) => {
-        try{
+        try {
             setMessagesId(item.messageId);
-        setChatUser(item)
-        const userChatsRef=doc(db,'chats',userData.id);
-        const userChatsSnapshot=await getDoc(userChatsRef);
-        const userChatsData=userChatsSnapshot.data();
-        const chatIndex=userChatsData.chatsData.findIndex((c)=>c.messageId===item.messageId);
-        userChatsData.chatsData[chatIndex].messageSeen=true;
-        await updateDoc(userChatsRef,{
-            chatsData:userChatsData.chatsData//chatData
-        })
-        }catch(error){
-            toast.error(error.message)
+            setChatUser(item);
+    
+            const userChatsRef = doc(db, 'chats', userData.id);
+            const userChatsSnapshot = await getDoc(userChatsRef);
+    
+            if (userChatsSnapshot.exists()) {
+                const userChatsData = userChatsSnapshot.data();
+                
+                // Verifica si chatsData está definido antes de acceder a él
+                if (userChatsData.chatsData) {
+                    const chatIndex = userChatsData.chatsData.findIndex((c) => c.messageId === item.messageId);
+                    
+                    // Solo si el chatIndex es válido
+                    if (chatIndex !== -1) {
+                        userChatsData.chatsData[chatIndex].messageSeen = true;
+                        
+                        await updateDoc(userChatsRef, {
+                            chatsData: userChatsData.chatsData
+                        });
+                    }
+                } else {
+                    console.warn("El usuario no tiene chatsData definido.");
+                    toast.error("No se encontró chatsData para el usuario.");
+                }
+            }
+        } catch (error) {
+            console.error("Error al establecer el chat:", error);
+            toast.error(error.message);
         }
-        
     };
+    
     return (
         <div className="ls">
             <div className="ls-top">
