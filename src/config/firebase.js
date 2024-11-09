@@ -23,6 +23,32 @@ const signup = async (username, email, password) => {
     try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         const user = res.user;
+        
+        // Crear el documento de usuario
+        await setDoc(doc(db, "users", user.uid), {
+            id: user.uid,
+            username: username.toLowerCase(),
+            email,
+            name: "",
+            avatar: "",
+            bio: "Hey there, I am using chat app",
+            lastSeen: Date.now()
+        });
+        
+        // Crear el documento de chat para el usuario con estructura inicial
+        await setDoc(doc(db, "chats", user.uid), {
+            chatsData: []
+        });
+    } catch (error) {
+        console.error(error);
+        toast.error(error.code.split('/')[1].split('-').join(" "));
+    }
+};
+
+/*const signup = async (username, email, password) => {
+    try {
+        const res = await createUserWithEmailAndPassword(auth, email, password);
+        const user = res.user;
         await setDoc(doc(db, "users", user.uid), {
             id: user.uid,
             username: username.toLowerCase(),
@@ -40,7 +66,7 @@ const signup = async (username, email, password) => {
         toast.error(error.code.split('/')[1].split('-').join(" "));
     }
 };
-
+*/
 const login = async (email, password) => {
     try {
         await signInWithEmailAndPassword(auth, email, password);
