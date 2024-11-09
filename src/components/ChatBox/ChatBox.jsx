@@ -9,52 +9,70 @@ const ChatBox=()=>{
     const {userData,messagesId,chatUser,messages,setMessages}=useContext(AppContext);
     const [input,setInput]=useState("");
     const sendMessage = async (id) => {
-    try {
-        if (input && messagesId) {
-            const messageRef = doc(db, 'messages', messagesId);
-            const messageDoc = await getDoc(messageRef);
-
-            // Si el documento no existe, inicialízalo con un array vacío para "messages"
-            if (!messageDoc.exists()) {
-                await setDoc(messageRef, { messages: [] });
-            }
-
-            // Ahora puedes agregar el mensaje con arrayUnion
-            await updateDoc(messageRef, {
-                messages: arrayUnion({
-                    sId: userData.id,
-                    text: input,
-                    createdAt: new Date()
-                })
-            });
-            // Actualiza la última información del chat
-            const userIDs = [chatUser.rId, userData.id];
-            userIDs.forEach(async (id) => {
-                const userChatsRef = doc(db, 'chats', id);
-                const userChatsSnapshot = await getDoc(userChatsRef);
-                if (userChatsSnapshot.exists()) {
-                    const userChatData = userChatsSnapshot.data();
-                    const chatIndex = userChatData.chatsData.findIndex((c) => c.messagesId === messagesId);
-                    if (chatIndex !== -1) {
-                        userChatData.chatsData[chatIndex].lastMessage = input.slice(0, 30);
-                        userChatData.chatsData[chatIndex].updateAt = Date.now();
-                        if (userChatData.chatsData[chatIndex].rId === userData.id) {
-                            userChatData.chatsData[chatIndex].messageSeen = false;
-                        }
-                        await updateDoc(userChatsRef, {
-                            chatsData: userChatData.chatsData
-                        });
-                    }
+        try {
+            if (input && messagesId) {
+                const messageRef = doc(db, 'messages', messagesId);
+                const messageDoc = await getDoc(messageRef);
+    
+                // Si el documento no existe, inicialízalo con un array vacío para "messages"
+                if (!messageDoc.exists()) {
+                    await setDoc(messageRef, { messages: [] });
                 }
-            });
+    
+                // Ahora puedes agregar el mensaje con arrayUnion
+                await updateDoc(messageRef, {
+                    messages: arrayUnion({
+                        sId: userData.id,
+                        text: input,
+                        createdAt: new Date()
+                    })
+                });
+    
+                // Actualiza la última información del chat para ambos usuarios
+                const userIDs = [chatUser.rId, userData.id];
+                userIDs.forEach(async (id) => {
+                    const userChatsRef = doc(db, 'chats', id);
+                    const userChatsSnapshot = await getDoc(userChatsRef);
+    
+                    if (userChatsSnapshot.exists()) {
+                        const userChatData = userChatsSnapshot.data();
+    
+                        // Nueva lógica para actualizar o agregar el chat en chatsData
+                        if (userChatData && Array.isArray(userChatData.chatsData)) {
+                            const chatIndex = userChatData.chatsData.findIndex((c) => c.messagesId === messagesId);
+                            
+                            if (chatIndex !== -1) {
+                                // Actualiza el mensaje y marca como no leído
+                                userChatData.chatsData[chatIndex].lastMessage = input.slice(0, 30);
+                                userChatData.chatsData[chatIndex].updateAt = Date.now();
+                                if (userChatData.chatsData[chatIndex].rId === userData.id) {
+                                    userChatData.chatsData[chatIndex].messageSeen = false;
+                                }
+                            } else {
+                                // Agrega el mensaje si no existe en chatsData
+                                userChatData.chatsData.push({
+                                    messagesId,
+                                    lastMessage: input.slice(0, 30),
+                                    updateAt: Date.now(),
+                                    rId: chatUser.rId,
+                                    messageSeen: false,
+                                });
+                            }
+    
+                            await updateDoc(userChatsRef, {
+                                chatsData: userChatData.chatsData
+                            });
+                        }
+                    }
+                });
+            }
+        } catch (error) {
+            console.error("Error al enviar el mensaje:", error);
+            toast.error("Error al enviar el mensaje");
         }
-    } catch (error) {
-        console.error("Error al enviar el mensaje:", error);
-        toast.error("Error al enviar el mensaje");
-    }
-    setInput("");
-};
-
+        setInput("");
+    };
+    
     /*ORIGINAL ->ARRIBA DEL IA
     const sendMessage=async(id)=>{
         try{
