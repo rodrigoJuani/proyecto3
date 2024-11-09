@@ -135,6 +135,22 @@ const ChatBox=()=>{
             return hour+":"+minute+" AM";
         }
     }
+    useEffect(() => {
+        if (messagesId) {
+            const unSub = onSnapshot(doc(db, 'messages', messagesId), (res) => {
+                const messageData = res.data();
+                if (messageData && messageData.messages) {
+                    console.log("Snapshot data:", messageData.messages); // Verifica que los datos estén llegando
+                    setMessages(messageData.messages.reverse());
+                }
+            });
+            return () => {
+                unSub();
+            };
+        }
+    }, [messagesId]);
+    
+    /*ORIGINAL ARIBA MOd
     useEffect(()=>{
         if(messagesId){
             const unSub=onSnapshot(doc(db,'messages',messagesId),(res)=>{
@@ -144,7 +160,7 @@ const ChatBox=()=>{
                 unSub();
             }
         }
-    },[messagesId])
+    },[messagesId])*/
 
 
     return chatUser && chatUser.userData? (

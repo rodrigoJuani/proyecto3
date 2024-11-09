@@ -15,7 +15,7 @@ const Login=()=> {
         if (currState === "Sign up") {
             await signup(userName, email, password);
         } else {
-            await login(email, password);ç
+            await login(email, password);
         }
     } catch (error) {
         console.error("Error:", error);
