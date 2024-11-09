@@ -42,7 +42,8 @@ const LeftSidebar = () => {
                 console.log("Query Snapshot:", querySnap);
                 console.log("Documents:", querySnap.docs);
 
-                if (!querySnap.empty && querySnap.docs[0].data().id!==userData.id) {
+                if (!querySnap.empty && querySnap.docs[0].data().id !== userData.id) {
+
                     let userExist=false;
                     chatData.map((user)=>{
                         if(user.rId===querySnap.docs[0].data.id){
