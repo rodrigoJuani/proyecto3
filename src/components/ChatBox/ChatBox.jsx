@@ -171,6 +171,26 @@ const ChatBox=()=>{
             <img src={assets.help_icon} className="help" alt=""/>
         </div>
 
+        <div className="chat-msg">
+    {messages.length > 0 ? (
+        messages.map((msg, index) => (
+            <div key={index} className={msg.sId === userData.id ? "s-msg" : "r-msg"}>
+                {msg.image ? (
+                    <img className="msg-img" src={msg.image} alt="" />
+                ) : (
+                    <p className="msg">{msg.text}</p>
+                )}
+                <div>
+                    <img src={msg.sId === userData.id ? userData.avatar : chatUser.userData.avatar} alt="" />
+                    <p>{convertTimestamp(msg.createdAt)}</p>
+                </div>
+            </div>
+        ))
+    ) : (
+        <p>No hay mensajes</p>
+    )}
+</div>
+{/* 
             <div className="chat-msg">
             {messages.map((msg,index)=>(
                 <div key={index} className={msg.sId===userData.id ? "s-msg" : "r-msg"}>
@@ -185,9 +205,7 @@ const ChatBox=()=>{
                 </div>
             
             ))}
-
-                
-            </div>
+            </div>*/}
         
 
         <div className="chat-input">
