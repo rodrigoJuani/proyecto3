@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import './ChatBox.css'
 import assets from "../../assets/assets";
 import { AppContext } from "../../context/AppContext";
-import { arrayUnion, doc,onSnapshot, Timestamp, updateDoc,getDoc } from "firebase/firestore";  //getDoc puse
+import { arrayUnion, doc,onSnapshot, Timestamp, updateDoc,getDoc,setDoc } from "firebase/firestore";  //getDoc puse y setDoc
 import { db } from "../../config/firebase";
 import { toast } from "react-toastify";
 const ChatBox=()=>{
