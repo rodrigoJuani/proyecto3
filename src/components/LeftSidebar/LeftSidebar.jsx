@@ -134,28 +134,51 @@ const LeftSidebar = () => {
                     <input onChange={inputHandler} type="text" placeholder="Search here.." />
                 </div>
             </div>
+            
             <div className="ls-list">
-                {showSearch && user ? (
-                    <div onClick={addChat} className="friends add-user">
-                        <img src={user.avatar} alt="" /> 
-                        <p>{user.name}</p>
+    {showSearch && user ? (
+        <div onClick={addChat} className="friends add-user">
+            <img src={user.avatar} alt="" />
+            <p>{user.name}</p>
+        </div>
+    ) : (
+        // Si no hay búsqueda activa, mostrar los chats si existen
+        chatData.length > 0 ? (
+            chatData.map((item, index) => (
+                <div
+                    onClick={() => setChat(item)}
+                    key={index}
+                    className={`friends ${item.messageSeen || item.messageId === messageId ? "" : "border"}`}
+                >
+                    <img src={item.userData.avatar} alt="" />
+                    <div>
+                        <p>{item.userData.name}</p>
+                        <span>{item.lastMessage}</span>
                     </div>
-                ) : (
-                    chatData.length > 0 ? (
-                        chatData.map((item, index) => (
-                            <div onClick={() => setChat(item)} key={index} className={`friends ${item.messageSeen || item.messageId===messageId? "":"border"}`}>
-                                <img src={item.userData.avatar} alt="" />
-                                <div>
-                                    <p>{item.userData.name}</p>
-                                    <span>{item.lastMessage}</span>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <p>No hay usuarios disponibles.</p>
-                    )
-                )}
-            </div>
+                </div>
+            ))
+        ) : (
+            // Si no hay chats, mostrar todos los usuarios
+            users.length > 0 ? (
+                users.map((user, index) => (
+                    <div
+                        onClick={() => setChat({ userData: user })}
+                        key={index}
+                        className="friends"
+                    >
+                        <img src={user.avatar} alt="" />
+                        <div>
+                            <p>{user.name}</p>
+                            <span>No hay mensajes aún</span>
+                        </div>
+                    </div>
+                ))
+            ) : (
+                <p>No hay usuarios disponibles.</p>
+            )
+        )
+    )}
+</div>
             
         </div>
     );
@@ -206,4 +229,28 @@ export default LeftSidebar;
             )
         )
     )}
-</div>*/
+</div>
+EL ORIGINAL
+<div className="ls-list">
+                {showSearch && user ? (
+                    <div onClick={addChat} className="friends add-user">
+                        <img src={user.avatar} alt="" /> 
+                        <p>{user.name}</p>
+                    </div>
+                ) : (
+                    chatData.length > 0 ? (
+                        chatData.map((item, index) => (
+                            <div onClick={() => setChat(item)} key={index} className={`friends ${item.messageSeen || item.messageId===messageId? "":"border"}`}>
+                                <img src={item.userData.avatar} alt="" />
+                                <div>
+                                    <p>{item.userData.name}</p>
+                                    <span>{item.lastMessage}</span>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No hay usuarios disponibles.</p>
+                    )
+                )}
+            </div>
+*/
