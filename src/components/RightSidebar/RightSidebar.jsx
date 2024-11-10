@@ -27,7 +27,7 @@ const RightSidebar=()=>{
         <hr/>
         <div className="rs-media">
             <p>Media</p>
-            <div>{msgImages.map((url,index)=>(<image onClick={()=>window.open(url)} key={index} src={url} />))}
+            <div>{msgImages.map((url,index)=>(<img onClick={()=>window.open(url)} key={index} src={url} />))}
                 {
                 /*<img src={assets.pic1} alt="" />
                 <img src={assets.pic2} alt="" />

@@ -41,25 +41,23 @@ const AppContextProvider=(props)=>{
     }
     
     useEffect(() => {
-    if (userData) {
-        const chatsRef = doc(db, 'chats', userData.id);
-        const unSub = onSnapshot(chatsRef, async (res) => {
-            const chatItems = res.data().chatsData; 
-            const tempData = [];
-            for (const item of chatItems) {
-                const userRef = doc(db, 'users', item.rId);
-                const userSnap = await getDoc(userRef);
-                const userData = userSnap.data();
-                tempData.push({ ...item, userData })
-            }
-            setChatData(tempData.sort((a, b) => b.updatedAt - a.updatedAt))
-        })
-        return () => {
-            unSub();
+        if (userData) {
+            const chatsRef = doc(db, 'chats', userData.id);
+            const unSub = onSnapshot(chatsRef, async (res) => {
+                const chatItems = res.data().chatsData; 
+                const tempData = [];
+                for (const item of chatItems) {
+                    const userRef = doc(db, 'users', item.rId);
+                    const userSnap = await getDoc(userRef);
+                    const userData = userSnap.data();
+                    tempData.push({ ...item, userData })
+                }
+                setChatData(tempData.sort((a, b) => b.updatedAt - a.updatedAt))
+            });
+            return () => unSub();
         }
-    }
-}, [userData])
-
+    }, [userData?.id]);
+    
     const value={
         userData,setUserData,
         chatData,setChatData,
