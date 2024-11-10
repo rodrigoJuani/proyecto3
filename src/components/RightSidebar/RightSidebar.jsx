@@ -4,8 +4,10 @@ import assets from "../../assets/assets"
 import { logout } from "../../config/firebase";
 import { AppContext } from "../../context/AppContext";
 const RightSidebar=()=>{
+
     const {chatUser,messages}=useContext(AppContext);
     const [msgImages,setMsgImages]=useState([]);
+
     useEffect(()=>{
         let tempVar=[];
         messages.map((msg)=>{
@@ -25,11 +27,7 @@ const RightSidebar=()=>{
         <hr/>
         <div className="rs-media">
             <p>Media</p>
-            <div>{
-                msgImages.map((url,index)=>(
-                    <image onClick={()=>window.open(url)} key={index} src={url} />
-                ))
-                }
+            <div>{msgImages.map((url,index)=>(<image onClick={()=>window.open(url)} key={index} src={url} />))}
                 {
                 /*<img src={assets.pic1} alt="" />
                 <img src={assets.pic2} alt="" />
@@ -42,7 +40,8 @@ const RightSidebar=()=>{
         </div>
         <button onClick={()=>logout()}>Logout</button>
     </div>)
-    :(<div className="rs">
+    :(
+    <div className="rs">
         <button onClick={()=>logout()}>Logout</button>
     </div>
     )
