@@ -94,7 +94,7 @@ const ChatBox=()=>{
                 const messageData = res.data();
                 if (messageData && messageData.messages) {
                     console.log("Snapshot data:", messageData.messages); // Verifica que los datos estén llegando
-                    setMessages(messageData.messages.reverse());
+                    setMessages(messageData.messages.reverse()); // Se invierten los mensajes para mostrarlos en orden
                 }
             });
             return () => {
@@ -102,6 +102,7 @@ const ChatBox=()=>{
             };
         }
     }, [messagesId]);
+    
     
     /*ORIGINAL ARIBA MOd
     useEffect(()=>{
