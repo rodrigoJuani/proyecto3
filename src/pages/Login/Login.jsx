@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import './Login.css'
 import assets from '../../assets/assets'
-import {signup ,login} from 'C:/Users/pc/Desktop/proyecto3/src/config/firebase.js'
+import {signup ,login, resetPass} from '../config/firebase'
 const Login=()=> {
 
   const [currState, setCurrState] = useState("Sign up")
@@ -9,19 +9,14 @@ const Login=()=> {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const onSubmitHandler = async (event) => {
+  const onSubmitHandler =  (event) => {
     event.preventDefault();
-    try {
         if (currState === "Sign up") {
-            await signup(userName, email, password);
+            signup (userName, email, password);
         } else {
-            await login(email, password);
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        // Aquí puedes mostrar un mensaje de error al usuario
-    }
-};
+            login(email, password);
+        }   
+}
 
 
   return (

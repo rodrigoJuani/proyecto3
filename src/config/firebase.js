@@ -65,7 +65,7 @@ const resetPass=async (email) =>{
         return null;
     }
     try{
-        const userRef =collection(sb,'users');
+        const userRef =collection(db,'users');
         const q=query(userRef,where("email","==",email))
         const querySnap=await getDocs(q);
         if(!querySnap.empty){
@@ -80,4 +80,4 @@ const resetPass=async (email) =>{
         toast.error(error.message)
     }
 }
-export  { signup , login, logout, auth, db,resetPass };
+export  { signup , login, logout, auth, db,resetPass }
