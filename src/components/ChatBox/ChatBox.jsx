@@ -47,7 +47,7 @@ const ChatBox=()=>{
         setInput("");
     }
 
-    const sendImage=async(e)=>{
+    const sendImage = async(e) => {
         try{
             const fileUrl=await upload(e.target.files[0]);
             if(fileUrl && messagesId){
@@ -59,11 +59,12 @@ const ChatBox=()=>{
                     })
                 })
 
-
                 const usersIDs=[chatUser.rId,userData.id];
-                usersIDs.forEach(async(id)=>{
+
+                usersIDs.forEach(async (id) => {
                     const userChatsRef=doc(db,'chats',id);
                     const userChatsSnapshot=await getDoc(userChatsRef);
+
                     if(userChatsSnapshot.exists()){
                         const userChatData=userChatsSnapshot.data();
                         const chatIndex=userChatData.chatsData.findIndex((c)=>c.messagesId===messagesId);
@@ -77,7 +78,6 @@ const ChatBox=()=>{
                         })
                     }
                 })
-
 
             }
         } catch(error){
@@ -97,17 +97,13 @@ const ChatBox=()=>{
     useEffect(() => {
         if (messagesId) {
             const unSub = onSnapshot(doc(db, 'messages', messagesId), (res) => {
-                const messageData = res.data();
-                if (messageData && messageData.messages) {
-                    console.log("Snapshot data:", messageData.messages); // Verifica que los datos estén llegando
-                    setMessages(messageData.messages.reverse()); // Se invierten los mensajes para mostrarlos en orden
-                }
-            });
+                    setMessages(res.data().messages.reverse());
+            })
             return () => {
                 unSub();
-            };
+            }
         }
-    }, [messagesId]);
+    }, [messagesId])
     
     
     /*ORIGINAL ARIBA MOd
