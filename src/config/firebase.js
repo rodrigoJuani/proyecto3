@@ -57,6 +57,9 @@ const logout = async () => {
         console.error(error);
         toast.error(error.code.split('/')[1].split('-').join(" "));
     }
-};
+}
 
+const resetPass=async (email) =>{
+    if(!email){}
+}
 export  { signup , login, logout, auth, db };
