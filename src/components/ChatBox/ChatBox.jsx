@@ -7,6 +7,7 @@ import { db } from "../../config/firebase";
 import { toast } from "react-toastify";
 const ChatBox=()=>{
     const {userData,messagesId,chatUser,messages,setMessages}=useContext(AppContext);
+    
     const [input,setInput]=useState("");
 
     const sendMessage=async(id)=>{
