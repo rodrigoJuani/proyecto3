@@ -32,11 +32,11 @@ const signup = async (username, email, password) => {
             avatar: "",
             bio: "Hey there, I am using chat app",
             lastSeen: Date.now()
-        });
+        })
         // Crear el documento de chat para el usuario con estructura inicial
         await setDoc(doc(db, "chats", user.uid), {
             chatsData: []
-        });
+        })
     } catch (error) {
         console.error(error);
         toast.error(error.code.split('/')[1].split('-').join(" "));
