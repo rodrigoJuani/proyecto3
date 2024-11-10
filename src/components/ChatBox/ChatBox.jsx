@@ -7,10 +7,10 @@ import { db } from "../../config/firebase";
 import { toast } from "react-toastify";
 const ChatBox=()=>{
     const {userData,messagesId,chatUser,messages,setMessages}=useContext(AppContext);
-    
+
     const [input,setInput]=useState("");
 
-    const sendMessage=async(id)=>{
+    const sendMessage = async() => {
         try{
             if(input && messagesId){
                 await updateDoc(doc(db,'messages',messagesId),{
@@ -20,10 +20,13 @@ const ChatBox=()=>{
                         createdAt:new Date()
                     })
                 })
+
                 const userIDs=[chatUser.rId,userData.id];
+
                 userIDs.forEach( async(id)=>{
                     const userChatsRef=doc(db,'chats',id);
                     const userChatsSnapshot=await getDoc(userChatsRef);
+                    
                     if(userChatsSnapshot.exists()){
                         const userChatData=userChatsSnapshot.data();
                         const chatIndex=userChatData.chatsData.findIndex((c)=>c.messagesId===messagesId);
