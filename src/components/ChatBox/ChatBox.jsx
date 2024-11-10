@@ -26,7 +26,7 @@ const ChatBox=()=>{
                 userIDs.forEach( async(id)=>{
                     const userChatsRef=doc(db,'chats',id);
                     const userChatsSnapshot=await getDoc(userChatsRef);
-                    
+
                     if(userChatsSnapshot.exists()){
                         const userChatData=userChatsSnapshot.data();
                         const chatIndex=userChatData.chatsData.findIndex((c)=>c.messagesId===messagesId);
@@ -41,7 +41,9 @@ const ChatBox=()=>{
                     }
                 })
             }
-        }catch(error){}
+        }catch(error){
+            toast.error(error.message);
+        }
         setInput("");
     }
 
@@ -86,7 +88,7 @@ const ChatBox=()=>{
         let date=timestamp.toDate();
         const hour=date.getHours();
         const minute=date.getMinutes();
-        if(hours>12){
+        if(hour>12){
             return hour-12+":"+minute+" PM";
         }else{
             return hour+":"+minute+" AM";
