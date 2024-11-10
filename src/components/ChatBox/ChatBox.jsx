@@ -109,7 +109,7 @@ const ChatBox=()=>{
     }, [messagesId])
     
     return chatUser ? (
-    <div className="chat-box">
+    <div className={`chat-box ${chatVisible?"":"hidden"}`}>
         <div className="chat-user">
             <img src={chatUser.userData.avatar} alt=''/>
             <p>{chatUser.userData.name} {Date.now()-chatUser.userData.lastSeen<=70000 ?<img className="dot" src= {assets.green_dot} alt="" />:null }</p>
@@ -143,7 +143,7 @@ const ChatBox=()=>{
             </div>
         </div>
     )
-    :<div className="chat-welcome">
+    :<div className={`chat-welcome ${chatVisible?"":"hidden"}`}>
         <img src={assets.logo_icon} alt=""/>
         <p>Chat anytime, anywhere</p>
     </div>
