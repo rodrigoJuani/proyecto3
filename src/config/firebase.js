@@ -1,7 +1,7 @@
 // firebase.js (o el nombre que le hayas dado)
 import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { getFirestore, doc, setDoc, collection, query, where } from "firebase/firestore";
+import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getFirestore, doc, setDoc, collection, query, where, getDocs } from "firebase/firestore";
 import { toast } from "react-toastify";
 
 // Configuración de Firebase
@@ -67,6 +67,11 @@ const resetPass=async (email) =>{
     try{
         const userRef =collection(sb,'users');
         const q=query(userRef,where("email","==",email))
+        const querySnap=await getDocs(q);
+        if(!querySnap.empty){
+            await sendPasswordResetEmail(auth,email);
+            toast.success("Reset Email Sent")
+        }
     }catch(error){}
 }
 export  { signup , login, logout, auth, db };
