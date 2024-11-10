@@ -19,7 +19,7 @@ const ChatBox=()=>{
                         createdAt:new Date()
                     })
                 })
-                const userIDs=[chatUser.rId,userData.id];
+                const userIs=[chatUser.rId,userData.id];
                 userIDs.forEach( async(id)=>{
                     const userChatsRef=doc(db,'chats',id);
                     const userChatsSnapshot=await getDoc(userChatsRef);

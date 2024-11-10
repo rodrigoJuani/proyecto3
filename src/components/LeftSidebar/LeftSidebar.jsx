@@ -68,37 +68,48 @@ const LeftSidebar = () => {
     };
 
     const addChat = async () => {
-        const messagesRef=collection(db,"messages");
-        const chatsRef=collection(db,"chats");
+        const messagesRef = collection(db, "messages");
+        const chatsRef = collection(db, "chats");
+    
         try {
-            const newMessageRef=doc(messagesRef);
-            await setDoc(newMessageRef,{
-                createAt:serverTimestamp(),
-                messages:[]
-            })
-            await updateDoc(doc(chatsRef,user.id),{
-                chatsData:arrayUnion({
-                    messageId:newMessageRef.id,
-                    lastMessage:"",
-                    rId:userData.id,
-                    updateAt:Date.now(),
-                    messageSeen:true
+            // Crea un nuevo documento en la colección `messages`
+            const newMessageRef = doc(messagesRef); // Esto crea un ID único automáticamente
+            await setDoc(newMessageRef, {
+                createdAt: serverTimestamp(),
+                messages: []
+            });
+            console.log("Documento de mensaje creado:", newMessageRef.id);
+    
+            // Actualiza la colección `chats` del usuario actual
+            await updateDoc(doc(chatsRef, user.id), {
+                chatsData: arrayUnion({
+                    messageId: newMessageRef.id,
+                    lastMessage: "",
+                    rId: userData.id,
+                    updatedAt: Date.now(),
+                    messageSeen: true
                 })
-            })
-            await updateDoc(doc(chatsRef,userData.id),{
-                chatsData:arrayUnion({
-                    messageId:newMessageRef.id,
-                    lastMessage:"",
-                    rId:user.id,
-                    updateAt:Date.now(),
-                    messageSeen:true
+            });
+            console.log("Chat añadido al usuario:", user.id);
+    
+            // Actualiza la colección `chats` del otro usuario
+            await updateDoc(doc(chatsRef, userData.id), {
+                chatsData: arrayUnion({
+                    messageId: newMessageRef.id,
+                    lastMessage: "",
+                    rId: user.id,
+                    updatedAt: Date.now(),
+                    messageSeen: true
                 })
-            })
+            });
+            console.log("Chat añadido al usuario:", userData.id);
+    
         } catch (error) {
-            toast.error(error.message);
             console.error("Error al agregar el chat:", error);
+            toast.error("Error al agregar el chat: " + error.message);
         }
     };
+    
     const setChat = async (item) => {
         try {
             setMessagesId(item.messageId);
