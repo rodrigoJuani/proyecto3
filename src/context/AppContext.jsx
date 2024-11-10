@@ -57,7 +57,7 @@ const AppContextProvider=(props)=>{
             })
             return () => {unSub()};
         }
-    }, [userData?.id]);
+    }, [userData])
     
     const value={
         userData,setUserData,
@@ -65,7 +65,8 @@ const AppContextProvider=(props)=>{
         loadUserData,
         messages,setMessages,
         messagesId,setMessagesId,
-        chatUser,setChatUser
+        chatUser,setChatUser,
+        chatVisible,setChatVisible
     }
     return(
         <AppContext.Provider value={value}>
