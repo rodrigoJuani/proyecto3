@@ -29,7 +29,7 @@ const AppContextProvider=(props)=>{
                 lastSeen:Date.now()
             })
             setInterval(async ()=>{
-                if(chatUser){//auth.chatUser
+                if(auth.chatUser){//auth.chatUser
                     await updateDoc(userRef,{
                         lastSeen:Date.now()
                     })
