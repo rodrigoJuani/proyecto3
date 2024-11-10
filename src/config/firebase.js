@@ -72,6 +72,12 @@ const resetPass=async (email) =>{
             await sendPasswordResetEmail(auth,email);
             toast.success("Reset Email Sent")
         }
-    }catch(error){}
+        else{
+            toast.error("Email doesn't exists")
+        }
+    }catch(error){
+        console.error(error);
+        toast.error(error.message)
+    }
 }
-export  { signup , login, logout, auth, db };
+export  { signup , login, logout, auth, db,resetPass };
