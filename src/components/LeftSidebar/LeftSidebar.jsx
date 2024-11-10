@@ -59,7 +59,7 @@ const LeftSidebar = () => {
                 }
             } else {
                 setShowSearch(false);
-                setUser(null); // Resetea el usuario cuando el input está vacío
+                //setUser(null); // Resetea el usuario cuando el input está vacío
             }
         } catch (error) {
             console.error("Error fetching user:", error);
