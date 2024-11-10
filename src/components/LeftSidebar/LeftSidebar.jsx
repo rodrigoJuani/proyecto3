@@ -8,9 +8,10 @@ import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
 
 const LeftSidebar = () => {
+
     const navigate = useNavigate();
     const { userData, chatData,chatUser, setChatUser,setMessagesId, MessagesId } = useContext(AppContext);
-    const [users, setUsers] = useState([]); // Estado para almacenar todos los usuarios
+    //const [users, setUsers] = useState([]); // Estado para almacenar todos los usuarios
     const [user, setUser] = useState(null);
     const [showSearch, setShowSearch] = useState(false);
 
