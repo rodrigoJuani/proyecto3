@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import './LeftSidebar.css';
 import assets from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
-import { arrayUnion, collection, doc, getDocs,getDoc, query, serverTimestamp, setDoc, updateDoc, where } from "firebase/firestore";///añadi getDoc
+import { arrayUnion, collection, doc,getDoc, getDocs, query, serverTimestamp, setDoc, updateDoc, where } from "firebase/firestore";///añadi getDoc
 import { db } from "../../config/firebase";
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 const LeftSidebar = () => {
 
     const navigate = useNavigate();
-    const { userData, chatData,chatUser, setChatUser,setMessagesId, messagesId } = useContext(AppContext);
+    const { userData, chatData,chatUser, setChatUser,setMessagesId, messagesId,chatVisible,setChatVisible } = useContext(AppContext);
     const [user, setUser] = useState(null);
     const [showSearch, setShowSearch] = useState(false);
 
@@ -97,6 +97,7 @@ const LeftSidebar = () => {
             await updateDoc(userChatsRef,{
                 chatsData:userChatsData.chatsData
             })
+            setChatVisible(true);
             }catch (error) {
             toast.error(error.message);
             console.error("Error al establecer el chat:", error);
@@ -104,7 +105,7 @@ const LeftSidebar = () => {
     }
     
     return (
-        <div className="ls">
+        <div className={`ls ${chatVisible? "hidden":""}`}>
             <div className="ls-top">
                 <div className="ls-nav">
                     <img src={assets.logo} className="logo" alt='' />
