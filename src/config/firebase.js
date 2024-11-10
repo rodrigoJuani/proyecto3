@@ -31,15 +31,15 @@ const signup = async (username, email, password) => {
             avatar: "",
             bio: "Hey there, I am using chat app",
             lastSeen: Date.now()
-        });
+        })
         await setDoc(doc(db, "chats", user.uid), {
             chatsData: []
-        });
+        })
     } catch (error) {
         console.error(error);
         toast.error(error.code.split('/')[1].split('-').join(" "));
     }
-};
+}
 
 const login = async (email, password) => {
     try {
@@ -48,7 +48,7 @@ const login = async (email, password) => {
         console.error(error);
         toast.error(error.code.split('/')[1].split('-').join(" "));
     }
-};
+}
 
 const logout = async () => {
     try {
@@ -60,5 +60,3 @@ const logout = async () => {
 };
 
 export  { signup , login, logout, auth, db };
-
-////1:57 es la base de datos
