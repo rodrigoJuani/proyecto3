@@ -58,7 +58,7 @@ const AppContextProvider=(props)=>{
             unSub();
         }
     }
-}, [userData]);
+}, [userData])
 
     const value={
         userData,setUserData,

@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 const LeftSidebar = () => {
 
     const navigate = useNavigate();
-    const { userData, chatData,chatUser, setChatUser,setMessagesId, MessagesId } = useContext(AppContext);
+    const { userData, chatData,chatUser, setChatUser,setMessagesId, messagesId } = useContext(AppContext);
     //const [users, setUsers] = useState([]); // Estado para almacenar todos los usuarios
     const [user, setUser] = useState(null);
     const [showSearch, setShowSearch] = useState(false);
@@ -39,26 +39,23 @@ const LeftSidebar = () => {
                 const userRef = collection(db, 'users');
                 const q = query(userRef, where("username", "==", input.toLowerCase()));
                 const querySnap = await getDocs(q);
-
-                console.log("Query Snapshot:", querySnap);
-                console.log("Documents:", querySnap.docs);
-
                 if (!querySnap.empty && querySnap.docs[0].data().id !== userData.id) {
 
                     let userExist=false;
                     chatData.map((user)=>{
-                        if(user.rId===querySnap.docs[0].data.id){
+                        if(user.rId===querySnap.docs[0].data().id){
                             userExist=true;
                         }
                     })
-                        if (!userExist) {
-                            setUser(querySnap.docs[0].data());
-                        }
-                    
-                } else {
+                    if (!userExist) {
+                        setUser(querySnap.docs[0].data());
+                    }
+                } 
+                 else {
                     setUser(null);
                 }
-            } else {
+            } 
+            else {
                 setShowSearch(false);
                 //setUser(null); // Resetea el usuario cuando el input está vacío
             }
@@ -66,22 +63,19 @@ const LeftSidebar = () => {
             console.error("Error fetching user:", error);
             toast.error("Error fetching user: " + error.message);
         }
-    };
+    }
 
     const addChat = async () => {
         const messagesRef = collection(db, "messages");
         const chatsRef = collection(db, "chats");
-    
         try {
-            // Crea un nuevo documento en la colección `messages`
-            const newMessageRef = doc(messagesRef); // Esto crea un ID único automáticamente
+            const newMessageRef = doc(messagesRef);
+
             await setDoc(newMessageRef, {
                 createdAt: serverTimestamp(),
                 messages: []
-            });
-            console.log("Documento de mensaje creado:", newMessageRef.id);
-    
-            // Actualiza la colección `chats` del usuario actual
+            })
+            
             await updateDoc(doc(chatsRef, user.id), {
                 chatsData: arrayUnion({
                     messageId: newMessageRef.id,
@@ -90,10 +84,8 @@ const LeftSidebar = () => {
                     updatedAt: Date.now(),
                     messageSeen: true
                 })
-            });
-            console.log("Chat añadido al usuario:", user.id);
-    
-            // Actualiza la colección `chats` del otro usuario
+            })
+            
             await updateDoc(doc(chatsRef, userData.id), {
                 chatsData: arrayUnion({
                     messageId: newMessageRef.id,
@@ -102,9 +94,7 @@ const LeftSidebar = () => {
                     updatedAt: Date.now(),
                     messageSeen: true
                 })
-            });
-            console.log("Chat añadido al usuario:", userData.id);
-    
+            })
         } catch (error) {
             console.error("Error al agregar el chat:", error);
             toast.error("Error al agregar el chat: " + error.message);
@@ -118,6 +108,12 @@ const LeftSidebar = () => {
     
             const userChatsRef = doc(db, 'chats', userData.id);
             const userChatsSnapshot = await getDoc(userChatsRef);
+            const userChatsData=userChatsSnapshot.data();
+            const chatIndex=userChatsData.chatsData.findIndex(c=>c.messageId===item.messageId);
+            userChatsData.chatsData[chatIndex].messageSeen=true;
+            await updateDoc(userChatsRef,{
+                chatsData=
+            })
     
             if (userChatsSnapshot.exists()) {
                 const userChatsData = userChatsSnapshot.data();
@@ -166,15 +162,12 @@ const LeftSidebar = () => {
             </div>
             
             <div className="ls-list">
-    {showSearch && user ? (
-        <div onClick={addChat} className="friends add-user">
-            <img src={user.avatar} alt="" />
-            <p>{user.name}</p>
+                {showSearch && user 
+                ?<div onClick={addChat} className="friends add-user">
+                <img src={user.avatar} alt="" />
+                <p>{user.name}</p>
         </div>
-    ) : (
-        // Si no hay búsqueda activa, mostrar los chats si existen
-        chatData.length > 0 ? (
-            chatData.map((item, index) => (
+        :chatData.map((item, index) => (
                 <div
                     onClick={() => setChat(item)}
                     key={index}
@@ -186,7 +179,7 @@ const LeftSidebar = () => {
                         <span>{item.lastMessage}</span>
                     </div>
                 </div>
-            ))
+            )
         ) : (
             // Si no hay chats, mostrar todos los usuarios
             users.length > 0 ? (

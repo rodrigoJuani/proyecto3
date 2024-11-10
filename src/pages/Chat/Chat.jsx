@@ -22,8 +22,9 @@ const Chat=()=>{
                 <LeftSidebar/>
                 <ChatBox/>
                 <RightSidebar/>
-            </div>
+                </div>
             }
+            
         </div>
     )
 }
