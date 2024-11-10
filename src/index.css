@@ -12,3 +12,6 @@
 img.dot{
   width: 15px !important;
 }
+.hidden{
+  display: none;
+}
