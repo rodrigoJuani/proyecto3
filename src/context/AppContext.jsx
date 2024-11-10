@@ -13,6 +13,7 @@ const AppContextProvider=(props)=>{
     const[messagesId,setMessagesId]=useState(null);
     const[messages,setMessages]=useState([]);
     const[chatUser,setChatUser]=useState(null);
+    const[chatVisible,setChatVisible]=useState(false);
 
     const loadUserData=async(uid)=>{
         try{
@@ -50,11 +51,11 @@ const AppContextProvider=(props)=>{
                     const userRef = doc(db, 'users', item.rId);
                     const userSnap = await getDoc(userRef);
                     const userData = userSnap.data();
-                    tempData.push({ ...item, userData })
+                    tempData.push({...item, userData })
                 }
                 setChatData(tempData.sort((a, b) => b.updatedAt - a.updatedAt))
-            });
-            return () => unSub();
+            })
+            return () => {unSub()};
         }
     }, [userData?.id]);
     
