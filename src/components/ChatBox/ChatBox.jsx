@@ -105,21 +105,7 @@ const ChatBox=()=>{
         }
     }, [messagesId])
     
-    
-    /*ORIGINAL ARIBA MOd
-    useEffect(()=>{
-        if(messagesId){
-            const unSub=onSnapshot(doc(db,'messages',messagesId),(res)=>{
-                setMessages(res.data().messages.reverse())
-            })
-            return()=>{
-                unSub();
-            }
-        }
-    },[messagesId])*/
-
-
-    return chatUser && chatUser.userData? (
+    return chatUser ? (
     <div className="chat-box">
         <div className="chat-user">
             <img src={chatUser.userData.avatar} alt=''/>
@@ -128,42 +114,20 @@ const ChatBox=()=>{
         </div>
 
         <div className="chat-msg">
-        {messages.length > 0 ? (
-    messages.map((msg, index) => (
+
+        {messages.map((msg, index) => (
         <div key={index} className={msg.sId === userData.id ? "s-msg" : "r-msg"}>
-            {msg.image ? (
-                <img className="msg-img" src={msg.image} alt="" />
-            ) : (
-                <p className="msg">{msg.text}</p>
-            )}
+            {msg["image"] 
+            ? <img className="msg-img" src={msg.image} alt="" />
+            : <p className="msg">{msg.text}</p>
+            }
             <div>
                 <img src={msg.sId === userData.id ? userData.avatar : chatUser.userData.avatar} alt="" />
                 <p>{convertTimestamp(msg.createdAt)}</p>
             </div>
         </div>
-    ))
-) : (
-    <p>No hay mensajes</p>
-)}
-
-</div>
-{/* 
-            <div className="chat-msg">
-            {messages.map((msg,index)=>(
-                <div key={index} className={msg.sId===userData.id ? "s-msg" : "r-msg"}>
-                {msg["image"]
-                ? <img className="msg-img" src={msg.image} alt=""/>
-                :<p className="msg">{msg.text}</p>
-            }
-                <div>
-                <img src={msg.sId===userData.id? userData.avatar: chatUser.userData.avatar} alt=''/>
-                <p>{convertTimestamp(msg.createdAt)}</p>
-                </div>
-                </div>
-            
             ))}
-            </div>*/}
-        
+        </div>
 
         <div className="chat-input">
             <input onChange={(e)=>setInput(e.target.value)} value={input} type="text" placeholder="Send a Message" />
