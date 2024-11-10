@@ -1,7 +1,7 @@
 // firebase.js (o el nombre que le hayas dado)
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, collection, query, where } from "firebase/firestore";
 import { toast } from "react-toastify";
 
 // Configuración de Firebase
@@ -60,6 +60,13 @@ const logout = async () => {
 }
 
 const resetPass=async (email) =>{
-    if(!email){}
+    if(!email){
+        toast.error("Enter your email");
+        return null;
+    }
+    try{
+        const userRef =collection(sb,'users');
+        const q=query(userRef,where("email","==",email))
+    }catch(error){}
 }
 export  { signup , login, logout, auth, db };
