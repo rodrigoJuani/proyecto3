@@ -8,36 +8,7 @@ import { toast } from "react-toastify";
 const ChatBox=()=>{
     const {userData,messagesId,chatUser,messages,setMessages}=useContext(AppContext);
     const [input,setInput]=useState("");
-// Dentro de AppContextProvider
-const sendMessage = async (text) => {
-    if (!userData || !chatUser || !text) return;
 
-    try {
-        // Referencia al documento del chat en Firestore
-        const chatRef = doc(db, 'chats', messagesId);
-
-        // Crear un objeto de mensaje
-        const newMessage = {
-            text: text,
-            senderId: userData.id,
-            timestamp: Timestamp.now()
-        };
-
-        // Actualizar el documento del chat para añadir el nuevo mensaje
-        await updateDoc(chatRef, {
-            messages: arrayUnion(newMessage),
-            updatedAt: Timestamp.now() // Actualizar el tiempo de última actualización
-        });
-
-        // Añadir el mensaje a la lista local de mensajes
-        setMessages((prevMessages) => [...prevMessages, newMessage]);
-    } catch (error) {
-        console.error("Error al enviar el mensaje:", error);
-    }
-};
-
-    
-    /*ORIGINAL ->ARRIBA DEL IA
     const sendMessage=async(id)=>{
         try{
             if(input && messagesId){
@@ -68,7 +39,7 @@ const sendMessage = async (text) => {
             }
         }catch(error){}
         setInput("");
-    }*/
+    }
 
     const sendImage=async(e)=>{
         try{
