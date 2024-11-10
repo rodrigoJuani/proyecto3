@@ -126,23 +126,24 @@ const ChatBox=()=>{
         </div>
 
         <div className="chat-msg">
-    {messages.length > 0 ? (
-        messages.map((msg, index) => (
-            <div key={index} className={msg.sId === userData.id ? "s-msg" : "r-msg"}>
-                {msg.image ? (
-                    <img className="msg-img" src={msg.image} alt="" />
-                ) : (
-                    <p className="msg">{msg.text}</p>
-                )}
-                <div>
-                    <img src={msg.sId === userData.id ? userData.avatar : chatUser.userData.avatar} alt="" />
-                    <p>{convertTimestamp(msg.createdAt)}</p>
-                </div>
+        {messages.length > 0 ? (
+    messages.map((msg, index) => (
+        <div key={index} className={msg.sId === userData.id ? "s-msg" : "r-msg"}>
+            {msg.image ? (
+                <img className="msg-img" src={msg.image} alt="" />
+            ) : (
+                <p className="msg">{msg.text}</p>
+            )}
+            <div>
+                <img src={msg.sId === userData.id ? userData.avatar : chatUser.userData.avatar} alt="" />
+                <p>{convertTimestamp(msg.createdAt)}</p>
             </div>
-        ))
-    ) : (
-        <p>No hay mensajes</p>
-    )}
+        </div>
+    ))
+) : (
+    <p>No hay mensajes</p>
+)}
+
 </div>
 {/* 
             <div className="chat-msg">
