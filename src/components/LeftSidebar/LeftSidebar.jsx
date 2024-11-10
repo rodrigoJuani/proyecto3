@@ -78,6 +78,18 @@ const LeftSidebar = () => {
                     messageSeen: true
                 })
             })
+            const uSnap=await getDoc(doc(db,"users",user.id));
+            const uData=uSnap.data();
+            setChat({
+                messagesId:newMessageRef.id,
+                lastMessage:"",
+                rId:user.id,
+                updatedAt:Date.now(),
+                messageSeen:true,
+                userData:uData
+            })
+            setShowSearch(false)
+            setChatVisible(true)
         } catch (error) {
             console.error("Error al agregar el chat:", error);
             toast.error("Error al agregar el chat: " + error.message);
@@ -103,7 +115,17 @@ const LeftSidebar = () => {
             console.error("Error al establecer el chat:", error);
         }
     }
-    
+    useEffect(()=>{
+        const updateChatUserData=async()=>{
+            if(chatUser){
+                const userRef=doc(db,"users",chatUser.userData.id);
+                const userSnap=await getDoc(userRef);
+                const userData=userSnap.data();
+                setChatUser(prev=>({...prev,userData:userData}))
+            }
+        }
+        updateChatUserData();
+    },[chatData])
     return (
         <div className={`ls ${chatVisible? "hidden":""}`}>
             <div className="ls-top">
